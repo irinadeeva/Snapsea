@@ -1,0 +1,612 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BEFCE1D42C8F5CF80036E793 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCE1D32C8F5CF80036E793 /* AppDelegate.swift */; };
+		BEFCE1D62C8F5CF80036E793 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCE1D52C8F5CF80036E793 /* SceneDelegate.swift */; };
+		BEFCE1D82C8F5CF80036E793 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCE1D72C8F5CF80036E793 /* ViewController.swift */; };
+		BEFCE1DB2C8F5CF80036E793 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = BEFCE1DA2C8F5CF80036E793 /* Base */; };
+		BEFCE1DD2C8F5CFA0036E793 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEFCE1DC2C8F5CFA0036E793 /* Assets.xcassets */; };
+		BEFCE1E02C8F5CFA0036E793 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = BEFCE1DF2C8F5CFA0036E793 /* Base */; };
+		BEFCE1EB2C8F5CFA0036E793 /* SnapseaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCE1EA2C8F5CFA0036E793 /* SnapseaTests.swift */; };
+		BEFCE1F52C8F5CFB0036E793 /* SnapseaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCE1F42C8F5CFB0036E793 /* SnapseaUITests.swift */; };
+		BEFCE1F72C8F5CFB0036E793 /* SnapseaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCE1F62C8F5CFB0036E793 /* SnapseaUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BEFCE1E72C8F5CFA0036E793 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEFCE1C82C8F5CF80036E793 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BEFCE1CF2C8F5CF80036E793;
+			remoteInfo = Snapsea;
+		};
+		BEFCE1F12C8F5CFB0036E793 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEFCE1C82C8F5CF80036E793 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BEFCE1CF2C8F5CF80036E793;
+			remoteInfo = Snapsea;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BEFCE1D02C8F5CF80036E793 /* Snapsea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snapsea.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEFCE1D32C8F5CF80036E793 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BEFCE1D52C8F5CF80036E793 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		BEFCE1D72C8F5CF80036E793 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BEFCE1DA2C8F5CF80036E793 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BEFCE1DC2C8F5CFA0036E793 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BEFCE1DF2C8F5CFA0036E793 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BEFCE1E12C8F5CFA0036E793 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BEFCE1E62C8F5CFA0036E793 /* SnapseaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnapseaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEFCE1EA2C8F5CFA0036E793 /* SnapseaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapseaTests.swift; sourceTree = "<group>"; };
+		BEFCE1F02C8F5CFB0036E793 /* SnapseaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnapseaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEFCE1F42C8F5CFB0036E793 /* SnapseaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapseaUITests.swift; sourceTree = "<group>"; };
+		BEFCE1F62C8F5CFB0036E793 /* SnapseaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapseaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BEFCE1CD2C8F5CF80036E793 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEFCE1E32C8F5CFA0036E793 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEFCE1ED2C8F5CFB0036E793 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BEFCE1C72C8F5CF80036E793 = {
+			isa = PBXGroup;
+			children = (
+				BEFCE1D22C8F5CF80036E793 /* Snapsea */,
+				BEFCE1E92C8F5CFA0036E793 /* SnapseaTests */,
+				BEFCE1F32C8F5CFB0036E793 /* SnapseaUITests */,
+				BEFCE1D12C8F5CF80036E793 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BEFCE1D12C8F5CF80036E793 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BEFCE1D02C8F5CF80036E793 /* Snapsea.app */,
+				BEFCE1E62C8F5CFA0036E793 /* SnapseaTests.xctest */,
+				BEFCE1F02C8F5CFB0036E793 /* SnapseaUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BEFCE1D22C8F5CF80036E793 /* Snapsea */ = {
+			isa = PBXGroup;
+			children = (
+				BEFCE1D32C8F5CF80036E793 /* AppDelegate.swift */,
+				BEFCE1D52C8F5CF80036E793 /* SceneDelegate.swift */,
+				BEFCE1D72C8F5CF80036E793 /* ViewController.swift */,
+				BEFCE1D92C8F5CF80036E793 /* Main.storyboard */,
+				BEFCE1DC2C8F5CFA0036E793 /* Assets.xcassets */,
+				BEFCE1DE2C8F5CFA0036E793 /* LaunchScreen.storyboard */,
+				BEFCE1E12C8F5CFA0036E793 /* Info.plist */,
+			);
+			path = Snapsea;
+			sourceTree = "<group>";
+		};
+		BEFCE1E92C8F5CFA0036E793 /* SnapseaTests */ = {
+			isa = PBXGroup;
+			children = (
+				BEFCE1EA2C8F5CFA0036E793 /* SnapseaTests.swift */,
+			);
+			path = SnapseaTests;
+			sourceTree = "<group>";
+		};
+		BEFCE1F32C8F5CFB0036E793 /* SnapseaUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BEFCE1F42C8F5CFB0036E793 /* SnapseaUITests.swift */,
+				BEFCE1F62C8F5CFB0036E793 /* SnapseaUITestsLaunchTests.swift */,
+			);
+			path = SnapseaUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BEFCE1CF2C8F5CF80036E793 /* Snapsea */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEFCE1FA2C8F5CFB0036E793 /* Build configuration list for PBXNativeTarget "Snapsea" */;
+			buildPhases = (
+				BEFCE1CC2C8F5CF80036E793 /* Sources */,
+				BEFCE1CD2C8F5CF80036E793 /* Frameworks */,
+				BEFCE1CE2C8F5CF80036E793 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Snapsea;
+			productName = Snapsea;
+			productReference = BEFCE1D02C8F5CF80036E793 /* Snapsea.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BEFCE1E52C8F5CFA0036E793 /* SnapseaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEFCE1FD2C8F5CFB0036E793 /* Build configuration list for PBXNativeTarget "SnapseaTests" */;
+			buildPhases = (
+				BEFCE1E22C8F5CFA0036E793 /* Sources */,
+				BEFCE1E32C8F5CFA0036E793 /* Frameworks */,
+				BEFCE1E42C8F5CFA0036E793 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BEFCE1E82C8F5CFA0036E793 /* PBXTargetDependency */,
+			);
+			name = SnapseaTests;
+			productName = SnapseaTests;
+			productReference = BEFCE1E62C8F5CFA0036E793 /* SnapseaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BEFCE1EF2C8F5CFB0036E793 /* SnapseaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEFCE2002C8F5CFB0036E793 /* Build configuration list for PBXNativeTarget "SnapseaUITests" */;
+			buildPhases = (
+				BEFCE1EC2C8F5CFB0036E793 /* Sources */,
+				BEFCE1ED2C8F5CFB0036E793 /* Frameworks */,
+				BEFCE1EE2C8F5CFB0036E793 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BEFCE1F22C8F5CFB0036E793 /* PBXTargetDependency */,
+			);
+			name = SnapseaUITests;
+			productName = SnapseaUITests;
+			productReference = BEFCE1F02C8F5CFB0036E793 /* SnapseaUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BEFCE1C82C8F5CF80036E793 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					BEFCE1CF2C8F5CF80036E793 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					BEFCE1E52C8F5CFA0036E793 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = BEFCE1CF2C8F5CF80036E793;
+					};
+					BEFCE1EF2C8F5CFB0036E793 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = BEFCE1CF2C8F5CF80036E793;
+					};
+				};
+			};
+			buildConfigurationList = BEFCE1CB2C8F5CF80036E793 /* Build configuration list for PBXProject "Snapsea" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BEFCE1C72C8F5CF80036E793;
+			productRefGroup = BEFCE1D12C8F5CF80036E793 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BEFCE1CF2C8F5CF80036E793 /* Snapsea */,
+				BEFCE1E52C8F5CFA0036E793 /* SnapseaTests */,
+				BEFCE1EF2C8F5CFB0036E793 /* SnapseaUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BEFCE1CE2C8F5CF80036E793 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEFCE1DD2C8F5CFA0036E793 /* Assets.xcassets in Resources */,
+				BEFCE1E02C8F5CFA0036E793 /* Base in Resources */,
+				BEFCE1DB2C8F5CF80036E793 /* Base in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEFCE1E42C8F5CFA0036E793 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEFCE1EE2C8F5CFB0036E793 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BEFCE1CC2C8F5CF80036E793 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEFCE1D82C8F5CF80036E793 /* ViewController.swift in Sources */,
+				BEFCE1D42C8F5CF80036E793 /* AppDelegate.swift in Sources */,
+				BEFCE1D62C8F5CF80036E793 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEFCE1E22C8F5CFA0036E793 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEFCE1EB2C8F5CFA0036E793 /* SnapseaTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEFCE1EC2C8F5CFB0036E793 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEFCE1F72C8F5CFB0036E793 /* SnapseaUITestsLaunchTests.swift in Sources */,
+				BEFCE1F52C8F5CFB0036E793 /* SnapseaUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BEFCE1E82C8F5CFA0036E793 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BEFCE1CF2C8F5CF80036E793 /* Snapsea */;
+			targetProxy = BEFCE1E72C8F5CFA0036E793 /* PBXContainerItemProxy */;
+		};
+		BEFCE1F22C8F5CFB0036E793 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BEFCE1CF2C8F5CF80036E793 /* Snapsea */;
+			targetProxy = BEFCE1F12C8F5CFB0036E793 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BEFCE1D92C8F5CF80036E793 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BEFCE1DA2C8F5CF80036E793 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BEFCE1DE2C8F5CFA0036E793 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BEFCE1DF2C8F5CFA0036E793 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BEFCE1F82C8F5CFB0036E793 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BEFCE1F92C8F5CFB0036E793 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BEFCE1FB2C8F5CFB0036E793 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BSKM5XY794;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Snapsea/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = irinadeeva.Snapsea;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BEFCE1FC2C8F5CFB0036E793 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BSKM5XY794;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Snapsea/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = irinadeeva.Snapsea;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BEFCE1FE2C8F5CFB0036E793 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BSKM5XY794;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = irinadeeva.SnapseaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Snapsea.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Snapsea";
+			};
+			name = Debug;
+		};
+		BEFCE1FF2C8F5CFB0036E793 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BSKM5XY794;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = irinadeeva.SnapseaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Snapsea.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Snapsea";
+			};
+			name = Release;
+		};
+		BEFCE2012C8F5CFB0036E793 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BSKM5XY794;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = irinadeeva.SnapseaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Snapsea;
+			};
+			name = Debug;
+		};
+		BEFCE2022C8F5CFB0036E793 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BSKM5XY794;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = irinadeeva.SnapseaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Snapsea;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BEFCE1CB2C8F5CF80036E793 /* Build configuration list for PBXProject "Snapsea" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEFCE1F82C8F5CFB0036E793 /* Debug */,
+				BEFCE1F92C8F5CFB0036E793 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEFCE1FA2C8F5CFB0036E793 /* Build configuration list for PBXNativeTarget "Snapsea" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEFCE1FB2C8F5CFB0036E793 /* Debug */,
+				BEFCE1FC2C8F5CFB0036E793 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEFCE1FD2C8F5CFB0036E793 /* Build configuration list for PBXNativeTarget "SnapseaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEFCE1FE2C8F5CFB0036E793 /* Debug */,
+				BEFCE1FF2C8F5CFB0036E793 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEFCE2002C8F5CFB0036E793 /* Build configuration list for PBXNativeTarget "SnapseaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEFCE2012C8F5CFB0036E793 /* Debug */,
+				BEFCE2022C8F5CFB0036E793 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BEFCE1C82C8F5CF80036E793 /* Project object */;
+}
