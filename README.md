@@ -1,2 +1,2 @@
 # Snapsea
-Test task for iOS in Avito 
+Test task for the iOS Developer position at Avito.
