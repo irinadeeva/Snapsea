@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 final class ImageDetails: UIViewController {
+    
     weak var coordinator: MainCoordinator?
 
     override func viewDidLoad() {
