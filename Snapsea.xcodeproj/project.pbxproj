@@ -34,6 +34,8 @@
 		BEFCE2292C90CD640036E793 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCE2282C90CD640036E793 /* AppDelegate.swift */; };
 		BEFCE22A2C90CD640036E793 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCE2282C90CD640036E793 /* AppDelegate.swift */; };
 		BEFCE22B2C90CD640036E793 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCE2282C90CD640036E793 /* AppDelegate.swift */; };
+		BEFCE22E2C90D5280036E793 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCE22D2C90D5280036E793 /* ImageCell.swift */; };
+		BEFCE2342C90D84D0036E793 /* GeometricParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCE2332C90D84D0036E793 /* GeometricParams.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		BEFCE2182C90CC290036E793 /* NetworkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		BEFCE2192C90CC290036E793 /* NetworkTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTask.swift; sourceTree = "<group>"; };
 		BEFCE2282C90CD640036E793 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BEFCE22D2C90D5280036E793 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		BEFCE2332C90D84D0036E793 /* GeometricParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometricParams.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +130,7 @@
 				BEFCE20A2C90537D0036E793 /* Info.plist */,
 				BEFCE2282C90CD640036E793 /* AppDelegate.swift */,
 				BEFCE1D52C8F5CF80036E793 /* SceneDelegate.swift */,
+				BEFCE2322C90D8240036E793 /* Helper */,
 				BEFCE2092C9052260036E793 /* Resources */,
 				BEFCE2162C90CC0E0036E793 /* Foundation */,
 				BEFCE22C2C90CDC30036E793 /* Scenes */,
@@ -181,12 +186,45 @@
 		BEFCE22C2C90CDC30036E793 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				BEFCE2052C903D6C0036E793 /* MainCoordinator.swift */,
-				BEFCE2122C90AC7E0036E793 /* ImageDetails.swift */,
-				BEFCE1D72C8F5CF80036E793 /* ViewController.swift */,
-				BEFCE2032C9039840036E793 /* Coordinator.swift */,
+				BEFCE2312C90D6580036E793 /* Coordinator */,
+				BEFCE2302C90D6370036E793 /* ImageDelails  */,
+				BEFCE22F2C90D6290036E793 /* Images */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		BEFCE22F2C90D6290036E793 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				BEFCE1D72C8F5CF80036E793 /* ViewController.swift */,
+				BEFCE22D2C90D5280036E793 /* ImageCell.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		BEFCE2302C90D6370036E793 /* ImageDelails  */ = {
+			isa = PBXGroup;
+			children = (
+				BEFCE2122C90AC7E0036E793 /* ImageDetails.swift */,
+			);
+			path = "ImageDelails ";
+			sourceTree = "<group>";
+		};
+		BEFCE2312C90D6580036E793 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				BEFCE2032C9039840036E793 /* Coordinator.swift */,
+				BEFCE2052C903D6C0036E793 /* MainCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		BEFCE2322C90D8240036E793 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				BEFCE2332C90D84D0036E793 /* GeometricParams.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,11 +366,13 @@
 				BEFCE2062C903D6C0036E793 /* MainCoordinator.swift in Sources */,
 				BEFCE21F2C90CC290036E793 /* NetworkRequest.swift in Sources */,
 				BEFCE2292C90CD640036E793 /* AppDelegate.swift in Sources */,
+				BEFCE2342C90D84D0036E793 /* GeometricParams.swift in Sources */,
 				BEFCE1D82C8F5CF80036E793 /* ViewController.swift in Sources */,
 				BEFCE2222C90CC290036E793 /* NetworkTask.swift in Sources */,
 				BEFCE21C2C90CC290036E793 /* NetworkClient.swift in Sources */,
 				BEFCE2132C90AC7E0036E793 /* ImageDetails.swift in Sources */,
 				BEFCE1D62C8F5CF80036E793 /* SceneDelegate.swift in Sources */,
+				BEFCE22E2C90D5280036E793 /* ImageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
