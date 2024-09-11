@@ -7,14 +7,25 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+// MARK: - Protocol
+protocol PhotoListView: AnyObject, ErrorView, LoadingView {
+    func fetchPhotos(_ photos: [Photo])
+}
+
+final class PhotoListViewController: UIViewController {
 
     weak var coordinator: MainCoordinator?
+
+    private var photos: [Photo] = []
+
+    private let presenter: PhotoListPresenter
 
     private let params: GeometricParams = GeometricParams(cellCount: 2,
                                                           leftInset: 16,
                                                           rightInset: 16,
                                                           cellSpacing: 7)
+
+    lazy var activityIndicator = UIActivityIndicatorView()
 
     private let searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
@@ -22,7 +33,7 @@ final class ViewController: UIViewController {
         return searchController
     }()
 
-    private lazy var nftsCollection: UICollectionView = {
+    private lazy var photosCollection: UICollectionView = {
         let collectionView = UICollectionView(
             frame: .zero,
             collectionViewLayout: UICollectionViewFlowLayout()
@@ -31,8 +42,8 @@ final class ViewController: UIViewController {
         collectionView.isScrollEnabled = false
 
         collectionView.register(
-            ImageCell.self,
-            forCellWithReuseIdentifier: ImageCell.identifier)
+            PhotoCell.self,
+            forCellWithReuseIdentifier: PhotoCell.identifier)
 
         collectionView.isScrollEnabled = true
         collectionView.backgroundColor = .white
@@ -47,24 +58,33 @@ final class ViewController: UIViewController {
         return label
     }()
 
+    init(presenter: PhotoListPresenter) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .red
+        
+        presenter.viewDidLoad()
         setupUI()
     }
 }
 
-extension ViewController {
+extension PhotoListViewController {
 
     private func setupUI() {
         view.backgroundColor = .white
 
-        nftsCollection.delegate = self
-        nftsCollection.dataSource = self
+        photosCollection.delegate = self
+        photosCollection.dataSource = self
 
-        [nftsCollection, emptyLabel].forEach {
+        [photosCollection, emptyLabel].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -73,10 +93,10 @@ extension ViewController {
             emptyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emptyLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 
-            nftsCollection.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            nftsCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            nftsCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            nftsCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            photosCollection.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            photosCollection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            photosCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            photosCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
 
         setUpSearchBar()
@@ -90,26 +110,27 @@ extension ViewController {
 
 // MARK: - UICollectionViewDataSource
 
-extension ViewController: UICollectionViewDataSource {
+extension PhotoListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return photos.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: ImageCell.identifier,
-            for: indexPath) as? ImageCell else {
+            withReuseIdentifier: PhotoCell.identifier,
+            for: indexPath) as? PhotoCell else {
             return UICollectionViewCell()
         }
 
-        cell.updateCell()
+        let photo = photos[indexPath.item]
+        cell.updateCell(with: photo)
         return cell
     }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
-extension ViewController: UICollectionViewDelegateFlowLayout {
+extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let availableWidth = collectionView.frame.width - params.paddingWidth
         let cellWidth =  availableWidth / CGFloat(params.cellCount)
@@ -123,8 +144,22 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension ViewController: UISearchResultsUpdating {
+extension PhotoListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
+    }
+}
+
+extension PhotoListViewController: PhotoListView {
+    func fetchPhotos(_ photos: [Photo]) {
+        self.photos = photos
+        print(self.photos)
+
+        if self.photos.count != 0 {
+            emptyLabel.isHidden = true
+            photosCollection.reloadData()
+        } else {
+            emptyLabel.isHidden = false
+        }
     }
 }

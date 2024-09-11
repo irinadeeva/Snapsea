@@ -63,6 +63,7 @@ struct DefaultNetworkClient: NetworkClient {
         guard let urlRequest = create(request: request) else { return nil }
 
         let task = session.dataTask(with: urlRequest) { data, response, error in
+            
             guard let response = response as? HTTPURLResponse else {
                 onResponse(.failure(NetworkClientError.urlSessionError))
                 return
@@ -110,28 +111,16 @@ struct DefaultNetworkClient: NetworkClient {
     // MARK: - Private
 
     private func create(request: NetworkRequest) -> URLRequest? {
-        guard let endpoint = request.endpoint else {
-            assertionFailure("Empty endpoint")
-            return nil
-        }
 
-        var urlRequest = URLRequest(url: endpoint)
+        guard var urlComponents = URLComponents(string: request.endpoint) else { return nil }
+
+        urlComponents.queryItems = request.queryItems
+
+        guard let url = urlComponents.url else { return nil }
+
+        var urlRequest = URLRequest(url: url)
+
         urlRequest.httpMethod = request.httpMethod.rawValue
-
-        switch request.httpMethod {
-        case .get, .delete, .post:
-            if let dto = request.dto,
-                let dtoEncoded = try? encoder.encode(dto) {
-                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                urlRequest.httpBody = dtoEncoded
-            }
-        case .put:
-            if let dto = request.dto {
-                urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
-                urlRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-                urlRequest.httpBody = dto
-            }
-        }
 
         return urlRequest
     }

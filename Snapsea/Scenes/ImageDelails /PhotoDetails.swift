@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class ImageDetails: UIViewController {
+final class PhotoDetails: UIViewController {
     
     weak var coordinator: MainCoordinator?
 

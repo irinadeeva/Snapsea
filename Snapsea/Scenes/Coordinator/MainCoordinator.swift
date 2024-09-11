@@ -10,21 +10,24 @@ import UIKit
 
 final class MainCoordinator: Coordinator {
     
+    var servicesAssembly: ServicesAssembly
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
 
-    init(navigationController: UINavigationController) {
+    init(servicesAssembly: ServicesAssembly, navigationController: UINavigationController) {
+        self.servicesAssembly = servicesAssembly
         self.navigationController = navigationController
     }
 
     func start() {
-        let vc = ViewController()
+        let photoAssembly = PhotoAssembly(servicesAssembler: servicesAssembly)
+        let vc = photoAssembly.build()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: false)
     }
 
     func showDetails() {
-        let vc = ImageDetails()
+        let vc = PhotoDetails()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: false)
     }

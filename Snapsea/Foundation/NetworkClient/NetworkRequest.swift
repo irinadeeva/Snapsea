@@ -8,7 +8,7 @@ enum HttpMethod: String {
 }
 
 protocol NetworkRequest {
-    var endpoint: URL? { get }
+    var endpoint: String { get }
     var httpMethod: HttpMethod { get }
-    var dto: Data? { get }
+    var queryItems: [URLQueryItem] { get }
 }
