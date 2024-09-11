@@ -16,6 +16,8 @@ struct Photo {
     let thumbImageURL: String
     let largeImageURL: String
     let description: String?
+    let likes: Int?
+    let createdDate: String?
 
     init(from photo: PhotoResultResponse) {
         self.id = photo.id
@@ -25,5 +27,7 @@ struct Photo {
         self.thumbImageURL = photo.urls.thumb.absoluteString
         self.largeImageURL = photo.urls.full.absoluteString
         self.description = photo.description
+        self.likes = photo.likes
+        self.createdDate = photo.createdAt
     }
 }

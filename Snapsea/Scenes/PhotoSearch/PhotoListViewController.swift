@@ -33,6 +33,16 @@ final class PhotoListViewController: UIViewController {
         return searchController
     }()
 
+//    private lazy var sortButton: UIButton = {
+//        let button = UIButton()
+//        button.setImage(UIImage(named: "sort")?
+//            .withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+//        button.addTarget(self, action: #selector(didTapSortButton), for: .touchUpInside)
+//        return button
+//    }()
+
+
+
     private lazy var photosCollection: UICollectionView = {
         let collectionView = UICollectionView(
             frame: .zero,
@@ -80,15 +90,32 @@ extension PhotoListViewController {
     private func setupUI() {
         view.backgroundColor = .white
 
+//        let sortButton = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(didTapSortButton))
+//
+//        let sortButton = UIBarButtonItem(customView: sortButton)
+//        navigationItem.rightBarButtonItem = sortButton
+
+//        if let navBar = navigationController?.navigationBar {
+//            
+//            let rightButton = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(didTapSortButton))
+//
+////            rightButton.tintColor = .black
+//
+//            navBar.topItem?.rightBarButtonItem = rightButton
+//        }
+
         photosCollection.delegate = self
         photosCollection.dataSource = self
 
-        [photosCollection, emptyLabel].forEach {
+        [photosCollection, emptyLabel, activityIndicator].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
         NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+
             emptyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emptyLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 
@@ -105,6 +132,27 @@ extension PhotoListViewController {
         searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
     }
+
+//    @objc private func didTapSortButton() {
+//        let alert = UIAlertController(title: "Сортировка", message: nil, preferredStyle: .actionSheet)
+//
+//        alert.addAction(UIAlertAction(title: "По популярности", style: .default, handler: { [weak self] (_) in
+//            guard let self else { return }
+//
+////            self.presenter.sortByLikes(self.photos)
+//        }))
+//
+////        alert.addAction(UIAlertAction(title: "По дате размещения", style: .default, handler: { [weak self] (_) in
+////            guard let self else { return }
+////
+////            self.presenter.sortByCreatedDate(self.photos)
+////        }))
+//
+//        alert.addAction(UIAlertAction(title: "Закрыть", style: .cancel, handler: { (_) in
+//        }))
+//
+//        self.present(alert, animated: true)
+//    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -122,6 +170,14 @@ extension PhotoListViewController: UICollectionViewDataSource {
         }
 
         let photo = photos[indexPath.item]
+
+        let cachedImage = presenter.getCachedImage(for: photo.thumbImageURL)
+        if let imageData = cachedImage {
+            cell.updateImage(with: imageData)
+        } else {
+            // TODO: Загрузить заглушку
+        }
+
         cell.updateCell(with: photo)
         return cell
     }
@@ -164,6 +220,13 @@ extension PhotoListViewController: UISearchBarDelegate {
         
         presenter.findPhotosFor(text)
     }
+
+//    // Выполнение поиска по нажатию кнопки "Поиск"
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        guard let text = searchBar.text, !text.isEmpty else { return }
+//        print("Performing search for: \(text)")  // Для тестирования
+//        presenter.findPhotosFor(text)
+//    }
 }
 
 extension PhotoListViewController: PhotoListView {

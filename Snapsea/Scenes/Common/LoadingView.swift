@@ -8,26 +8,14 @@ protocol LoadingView {
 
 extension LoadingView {
     func showLoading() {
-        activityIndicator.startAnimating()
+        DispatchQueue.main.async {
+            activityIndicator.startAnimating()
+        }
     }
 
     func hideLoading() {
-        activityIndicator.stopAnimating()
-    }
-}
-
-extension LoadingView {
-    private static var window: UIWindow? {
-        return UIApplication.shared.windows.first
-    }
-
-    func showLoadingAndBlockUI() {
-        Self.window?.isUserInteractionEnabled = false
-        activityIndicator.startAnimating()
-    }
-
-    func hideLoadingAndUnblockUI() {
-        Self.window?.isUserInteractionEnabled = true
-        activityIndicator.stopAnimating()
+        DispatchQueue.main.async {
+            activityIndicator.stopAnimating()
+        }
     }
 }

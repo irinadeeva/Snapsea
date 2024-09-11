@@ -10,6 +10,9 @@ import Foundation
 protocol PhotoListPresenter {
     func findPhotosFor(_ text: String)
     func fetchPhotosNextPage()
+    func getCachedImage(for url: String) -> Data?
+//    func sortByLikes(_ loadedPhotos: [Photo])
+//    func sortByCreatedDate(_ loadedPhotos: [Photo])
 }
 
 enum PhotoState {
@@ -23,6 +26,9 @@ final class PhotoListPresenterImpl: PhotoListPresenter {
     weak var view: PhotoListView?
     private let service: PhotoService
     private var searchText = ""
+    private var loadedPhotos: [Photo] = []
+    private var imageCache = NSCache<NSString, NSData>()
+
     private var state = PhotoState.initial {
         didSet {
             stateDidChanged()
@@ -42,6 +48,26 @@ final class PhotoListPresenterImpl: PhotoListPresenter {
         state = .loading
     }
 
+    func getCachedImage(for url: String) -> Data? {
+            return imageCache.object(forKey: url as NSString) as Data?
+    }
+
+//    func sortByLikes(_ loadedPhotos: [Photo]) {
+//        let sortedPhotos = loadedPhotos.sorted{
+//            $0.likes < $1.likes
+//        }
+//
+//        view?.fetchPhotos(sortedPhotos)
+//    }
+
+//    func sortByCreatedDate(_ loadedPhotos: [Photo]) {
+//        let sortedPhotos = loadedPhotos.sorted{
+//            $0.createdAt < $1.createdAt
+//        }
+//
+//        view?.fetchPhotos(sortedPhotos)
+//    }
+
     private func stateDidChanged() {
         switch state {
         case .initial:
@@ -60,20 +86,37 @@ final class PhotoListPresenterImpl: PhotoListPresenter {
     }
 
     private func loadPhoto() {
-        var loadedPhotos: [Photo] = []
-
-        //TODO: add dispatch
-
         service.loadPhoto(for: searchText) { [weak self] result in
                 switch result {
                 case .success(let photos):
-                    loadedPhotos = photos
-                    self?.state = .data(loadedPhotos)
+                    self?.loadedPhotos.append(contentsOf: photos)
+                    self?.cachePhotosImages(photos)
                 case .failure(let error):
                     self?.state = .failed(error)
                 }
             }
     }
+
+    private func cachePhotosImages(_ photos: [Photo]) {
+        let dispatchGroup = DispatchGroup()
+
+        for photo in photos {
+            if let imageURL = URL(string: photo.thumbImageURL), imageCache.object(forKey: photo.thumbImageURL as NSString) == nil {
+                dispatchGroup.enter()
+                DispatchQueue.global().async {
+                    if let imageData = try? Data(contentsOf: imageURL) {
+                        self.imageCache.setObject(imageData as NSData, forKey: photo.thumbImageURL as NSString)
+                    }
+                    dispatchGroup.leave()
+                }
+            }
+        }
+
+        dispatchGroup.notify(queue: .main) {
+            self.state = .data(photos)
+        }
+    }
+
 
     private func makeErrorModel(_ error: Error) -> ErrorModel {
         let message: String
@@ -84,7 +127,7 @@ final class PhotoListPresenterImpl: PhotoListPresenter {
             message = "Error.unknown"
         }
 
-        let actionText = "Error.repeat"
+        let actionText = "Repeat"
         return ErrorModel(message: message, actionText: actionText) { [weak self] in
             self?.state = .loading
         }

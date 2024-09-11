@@ -31,16 +31,12 @@ final class PhotoCell: UICollectionViewCell {
 
 extension PhotoCell {
 
-    func updateCell(with photo: Photo) {
-//        cardImageView.image = UIImage(named: "tmp")
+    func updateImage(with data: Data) {
+        cardImageView.image =  UIImage(data: data) ?? UIImage()
+    }
 
-        var imageData = Data()
-        do {
-            imageData = try Data(contentsOf: photo.smallImageURL)
-            } catch {
-                        print("Failed to load image")
-        }
-        cardImageView.image =  UIImage(data: imageData) ?? UIImage()
+    func updateCell(with photo: Photo) {
+//       cardImageView.image = UIImage(named: "tmp")
     }
 
     private func setupUI() {
