@@ -7,9 +7,9 @@
 
 import UIKit
 
-final class ImageCell: UICollectionViewCell {
+final class PhotoCell: UICollectionViewCell {
     
-    static let identifier = "ImageCell"
+    static let identifier = "PhotoCell"
 
     private lazy var cardImageView: UIImageView = {
         let imageView = UIImageView()
@@ -29,10 +29,20 @@ final class ImageCell: UICollectionViewCell {
     }
 }
 
-extension ImageCell {
+extension PhotoCell {
 
-    func updateCell() {
-        cardImageView.image = UIImage(named: "tmp")
+    func updateCell(with photo: Photo) {
+//        cardImageView.image = UIImage(named: "tmp")
+
+        var imageData = Data()
+        do {
+            imageData = try Data(contentsOf: photo.smallImageURL)
+            } catch {
+                        print("Failed to load image")
+        }
+        cardImageView.image =  UIImage(data: imageData) ?? UIImage()
+
+        print("from updateCell(with photo: Photo)")
     }
 
     private func setupUI() {
