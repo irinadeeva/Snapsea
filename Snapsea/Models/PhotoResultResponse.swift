@@ -9,8 +9,8 @@ import Foundation
 
 struct PhotoResultResponse: Decodable {
     let id: String
-//    let width: Int
-//    let height: Int
+    let width: Int
+    let height: Int
 //    let createdAtString: String?
     let description: String?
     let urls: UrlsResultResponse

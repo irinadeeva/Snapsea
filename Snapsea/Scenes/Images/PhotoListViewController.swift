@@ -125,6 +125,15 @@ extension PhotoListViewController: UICollectionViewDataSource {
         cell.updateCell(with: photo)
         return cell
     }
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row + 1 == photos.count {
+            DispatchQueue.global().async { [weak self] in
+                guard let self else { return }
+                self.presenter.fetchPhotosNextPage()
+            }
+        }
+    }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
@@ -143,6 +152,12 @@ extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+extension PhotoListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        coordinator?.showDetails()
+    }
+}
+
 extension PhotoListViewController: UISearchBarDelegate {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         guard let text = searchBar.text, !text.isEmpty else { return }
@@ -154,7 +169,6 @@ extension PhotoListViewController: UISearchBarDelegate {
 extension PhotoListViewController: PhotoListView {
     func fetchPhotos(_ photos: [Photo]) {
         self.photos = photos
-        print(self.photos)
 
         if self.photos.count != 0 {
             emptyLabel.isHidden = true

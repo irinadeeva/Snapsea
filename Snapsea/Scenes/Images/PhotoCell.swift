@@ -41,8 +41,6 @@ extension PhotoCell {
                         print("Failed to load image")
         }
         cardImageView.image =  UIImage(data: imageData) ?? UIImage()
-
-        print("from updateCell(with photo: Photo)")
     }
 
     private func setupUI() {

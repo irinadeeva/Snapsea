@@ -9,6 +9,7 @@ import Foundation
 
 protocol PhotoListPresenter {
     func findPhotosFor(_ text: String)
+    func fetchPhotosNextPage()
 }
 
 enum PhotoState {
@@ -34,6 +35,10 @@ final class PhotoListPresenterImpl: PhotoListPresenter {
 
     func findPhotosFor(_ text: String) {
         searchText = text
+        state = .loading
+    }
+
+    func fetchPhotosNextPage() {
         state = .loading
     }
 

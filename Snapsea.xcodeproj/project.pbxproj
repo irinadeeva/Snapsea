@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BEBC960E2C91B95F00663D96 /* ImageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC960D2C91B95F00663D96 /* ImageStorage.swift */; };
+		BEBC96102C91BA0100663D96 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC960F2C91BA0100663D96 /* ImageService.swift */; };
 		BEFCE1D62C8F5CF80036E793 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCE1D52C8F5CF80036E793 /* SceneDelegate.swift */; };
 		BEFCE1D82C8F5CF80036E793 /* PhotoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCE1D72C8F5CF80036E793 /* PhotoListViewController.swift */; };
 		BEFCE1DD2C8F5CFA0036E793 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEFCE1DC2C8F5CFA0036E793 /* Assets.xcassets */; };
@@ -69,6 +71,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BEBC960D2C91B95F00663D96 /* ImageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorage.swift; sourceTree = "<group>"; };
+		BEBC960F2C91BA0100663D96 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		BEFCE1D02C8F5CF80036E793 /* Snapsea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snapsea.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEFCE1D52C8F5CF80036E793 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BEFCE1D72C8F5CF80036E793 /* PhotoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoListViewController.swift; sourceTree = "<group>"; };
@@ -264,6 +268,7 @@
 			children = (
 				BEFCE2362C9155840036E793 /* Request */,
 				BEFCE23D2C915A490036E793 /* PhotoService.swift */,
+				BEBC960F2C91BA0100663D96 /* ImageService.swift */,
 				BEFCE2452C915F5E0036E793 /* ServicesAssembly.swift */,
 			);
 			path = Service;
@@ -282,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				BEFCE2402C915C1A0036E793 /* PhotoStorage.swift */,
+				BEBC960D2C91B95F00663D96 /* ImageStorage.swift */,
 			);
 			path = MemoryStorage;
 			sourceTree = "<group>";
@@ -443,6 +449,7 @@
 			files = (
 				BEFCE2042C9039840036E793 /* Coordinator.swift in Sources */,
 				BEFCE2062C903D6C0036E793 /* MainCoordinator.swift in Sources */,
+				BEBC960E2C91B95F00663D96 /* ImageStorage.swift in Sources */,
 				BEFCE21F2C90CC290036E793 /* NetworkRequest.swift in Sources */,
 				BEFCE2292C90CD640036E793 /* AppDelegate.swift in Sources */,
 				BEFCE24D2C9178BE0036E793 /* ErrorView.swift in Sources */,
@@ -461,6 +468,7 @@
 				BEFCE1D62C8F5CF80036E793 /* SceneDelegate.swift in Sources */,
 				BEFCE2482C9161060036E793 /* PhotoAssembly.swift in Sources */,
 				BEFCE2512C918C690036E793 /* UrlsResultResponse.swift in Sources */,
+				BEBC96102C91BA0100663D96 /* ImageService.swift in Sources */,
 				BEFCE2532C918FAB0036E793 /* PhotoResultResponse.swift in Sources */,
 				BEFCE22E2C90D5280036E793 /* PhotoCell.swift in Sources */,
 				BEFCE23A2C9156230036E793 /* PhotoRequest.swift in Sources */,

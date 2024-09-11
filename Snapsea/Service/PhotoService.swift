@@ -17,6 +17,7 @@ final class PhotoServiceImpl: PhotoService {
 
     private let networkClient: NetworkClient
     private let storage: PhotoStorage
+    private var lastLoadedPage: Int = 0
 
     init(networkClient: NetworkClient, storage: PhotoStorage) {
         self.storage = storage
@@ -29,7 +30,7 @@ final class PhotoServiceImpl: PhotoService {
 //            return
 //        }
 
-        let request = PhotoRequest(text: text)
+        let request = PhotoRequest(text: text, page: lastLoadedPage)
         networkClient.send(request: request, type: SearchedPhotoResultResponse.self) { [weak storage] result in
             switch result {
             case .success(let data):
@@ -44,5 +45,7 @@ final class PhotoServiceImpl: PhotoService {
                 completion(.failure(error))
             }
         }
+
+        lastLoadedPage += 1
     }
 }

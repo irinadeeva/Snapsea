@@ -10,16 +10,20 @@ import Foundation
 
 struct Photo {
     let id: String
-    let description: String?
+    let width: Int
+    let height: Int
     let smallImageURL: URL
     let thumbImageURL: String
     let largeImageURL: String
+    let description: String?
 
     init(from photo: PhotoResultResponse) {
         self.id = photo.id
-        self.description = photo.description
+        self.width = photo.width
+        self.height = photo.height
         self.smallImageURL = photo.urls.small
         self.thumbImageURL = photo.urls.thumb.absoluteString
         self.largeImageURL = photo.urls.full.absoluteString
+        self.description = photo.description
     }
 }
