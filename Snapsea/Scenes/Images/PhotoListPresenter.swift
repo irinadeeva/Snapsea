@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PhotoListPresenter {
-    func viewDidLoad()
+    func findPhotosFor(_ text: String)
 }
 
 enum PhotoState {
@@ -21,7 +21,7 @@ final class PhotoListPresenterImpl: PhotoListPresenter {
 
     weak var view: PhotoListView?
     private let service: PhotoService
-    private var searchText = "dog"
+    private var searchText = ""
     private var state = PhotoState.initial {
         didSet {
             stateDidChanged()
@@ -32,7 +32,8 @@ final class PhotoListPresenterImpl: PhotoListPresenter {
         self.service = photoService
     }
 
-    func viewDidLoad() {
+    func findPhotosFor(_ text: String) {
+        searchText = text
         state = .loading
     }
 

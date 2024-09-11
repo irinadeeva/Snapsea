@@ -70,8 +70,7 @@ final class PhotoListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        presenter.viewDidLoad()
+
         setupUI()
     }
 }
@@ -103,7 +102,7 @@ extension PhotoListViewController {
     }
 
     private func setUpSearchBar() {
-        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
     }
 }
@@ -144,9 +143,11 @@ extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension PhotoListViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        let searchBar = searchController.searchBar
+extension PhotoListViewController: UISearchBarDelegate {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text, !text.isEmpty else { return }
+        
+        presenter.findPhotosFor(text)
     }
 }
 
@@ -160,6 +161,7 @@ extension PhotoListViewController: PhotoListView {
             photosCollection.reloadData()
         } else {
             emptyLabel.isHidden = false
+            photosCollection.isHidden = true
         }
     }
 }
