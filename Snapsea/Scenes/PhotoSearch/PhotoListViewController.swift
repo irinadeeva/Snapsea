@@ -49,8 +49,6 @@ final class PhotoListViewController: UIViewController {
             collectionViewLayout: UICollectionViewFlowLayout()
         )
 
-        collectionView.isScrollEnabled = false
-
         collectionView.register(
             PhotoCell.self,
             forCellWithReuseIdentifier: PhotoCell.identifier)
@@ -77,7 +75,6 @@ final class PhotoListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -210,8 +207,23 @@ extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
 
 extension PhotoListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        coordinator?.showDetails()
+        coordinator?.showDetails(of: photos[indexPath.row].id)
     }
+
+
+    //TODO: an option for fetchPhotosNextPage()
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if photos.count > 0 {
+//            let offsetY = scrollView.contentOffset.y
+//            let contentHeight = scrollView.contentSize.height
+//            let height = scrollView.frame.size.height
+//
+//            // Если пользователь прокручивает к концу списка
+//            if offsetY > contentHeight - height {
+//                self.presenter.fetchPhotosNextPage()
+//            }
+//        }
+//    }
 }
 
 extension PhotoListViewController: UISearchBarDelegate {

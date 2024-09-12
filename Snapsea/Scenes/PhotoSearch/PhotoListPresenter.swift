@@ -15,10 +15,6 @@ protocol PhotoListPresenter {
 //    func sortByCreatedDate(_ loadedPhotos: [Photo])
 }
 
-enum PhotoState {
-    case initial, loading, failed(Error), data([Photo])
-}
-
 final class PhotoListPresenterImpl: PhotoListPresenter {
 
     // MARK: - Properties
@@ -29,7 +25,7 @@ final class PhotoListPresenterImpl: PhotoListPresenter {
     private var loadedPhotos: [Photo] = []
     private var imageCache = NSCache<NSString, NSData>()
 
-    private var state = PhotoState.initial {
+    private var state = State<[Photo]>.initial {
         didSet {
             stateDidChanged()
         }
@@ -73,14 +69,17 @@ final class PhotoListPresenterImpl: PhotoListPresenter {
         case .initial:
             assertionFailure("can't move to initial state")
         case .loading:
-            view?.showLoading()
+            //TODO: doesnt work
+            view?.showLoadingAndBlockUI()
             loadPhoto()
         case .data(let photos):
             view?.fetchPhotos(photos)
-            view?.hideLoading()
+            //TODO: doesnt work
+            view?.hideLoadingAndUnblockUI()
         case .failed(let error):
             let errorModel = makeErrorModel(error)
-            view?.hideLoading()
+            //TODO: doesnt work 
+            view?.hideLoadingAndUnblockUI()
             view?.showError(errorModel)
         }
     }

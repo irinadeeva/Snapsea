@@ -19,3 +19,23 @@ extension LoadingView {
         }
     }
 }
+
+extension LoadingView {
+    private static var window: UIWindow? {
+        return UIApplication.shared.windows.first
+    }
+
+    func showLoadingAndBlockUI() {
+        DispatchQueue.main.async {
+            Self.window?.isUserInteractionEnabled = false
+            self.activityIndicator.startAnimating()
+        }
+    }
+
+    func hideLoadingAndUnblockUI() {
+        DispatchQueue.main.async {
+            Self.window?.isUserInteractionEnabled = true
+            self.activityIndicator.stopAnimating()
+        }
+    }
+}
