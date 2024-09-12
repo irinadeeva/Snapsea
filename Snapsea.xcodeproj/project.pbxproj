@@ -14,6 +14,7 @@
 		BEBC961A2C92DEC200663D96 /* UserResultRespond.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC96192C92DEC200663D96 /* UserResultRespond.swift */; };
 		BEBC961D2C93033800663D96 /* SuggestedHintTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC961C2C93033800663D96 /* SuggestedHintTableViewCell.swift */; };
 		BEBC96222C93302100663D96 /* NSMutableAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC96212C93302100663D96 /* NSMutableAttributedString.swift */; };
+		BEBC96242C934E9C00663D96 /* DateFormater.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC96232C934E9C00663D96 /* DateFormater.swift */; };
 		BEFCE1D62C8F5CF80036E793 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCE1D52C8F5CF80036E793 /* SceneDelegate.swift */; };
 		BEFCE1DD2C8F5CFA0036E793 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEFCE1DC2C8F5CFA0036E793 /* Assets.xcassets */; };
 		BEFCE1E02C8F5CFA0036E793 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = BEFCE1DF2C8F5CFA0036E793 /* Base */; };
@@ -82,6 +83,7 @@
 		BEBC96192C92DEC200663D96 /* UserResultRespond.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResultRespond.swift; sourceTree = "<group>"; };
 		BEBC961C2C93033800663D96 /* SuggestedHintTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedHintTableViewCell.swift; sourceTree = "<group>"; };
 		BEBC96212C93302100663D96 /* NSMutableAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedString.swift; sourceTree = "<group>"; };
+		BEBC96232C934E9C00663D96 /* DateFormater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormater.swift; sourceTree = "<group>"; };
 		BEFCE1D02C8F5CF80036E793 /* Snapsea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snapsea.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEFCE1D52C8F5CF80036E793 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BEFCE1DC2C8F5CFA0036E793 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 			children = (
 				BEFCE2332C90D84D0036E793 /* GeometricParams.swift */,
 				BEBC96212C93302100663D96 /* NSMutableAttributedString.swift */,
+				BEBC96232C934E9C00663D96 /* DateFormater.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				BEFCE2132C90AC7E0036E793 /* PhotoDetailsViewController.swift in Sources */,
 				BEFCE2442C915C9C0036E793 /* Photo.swift in Sources */,
 				BEFCE24B2C9176B90036E793 /* LoadingView.swift in Sources */,
+				BEBC96242C934E9C00663D96 /* DateFormater.swift in Sources */,
 				BEFCE23E2C915A490036E793 /* PhotoService.swift in Sources */,
 				BEFCE1D62C8F5CF80036E793 /* SceneDelegate.swift in Sources */,
 				BEFCE2482C9161060036E793 /* PhotoAssembly.swift in Sources */,

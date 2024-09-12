@@ -20,7 +20,7 @@ final class PhotoDetailsViewController: UIViewController {
     
     var activityIndicator = UIActivityIndicatorView()
 
-    private lazy var imageView: UIImageView = {
+    private var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 12
         imageView.layer.masksToBounds = true
@@ -29,7 +29,7 @@ final class PhotoDetailsViewController: UIViewController {
         return imageView
     }()
 
-    private lazy var textOverlayView: UIView = {
+    private var textOverlayView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 12
         view.layer.masksToBounds = true
@@ -37,22 +37,22 @@ final class PhotoDetailsViewController: UIViewController {
         return view
     }()
 
-    private lazy var imageDescription: UILabel = {
+    private var imageDescription: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.lineBreakMode =  .byWordWrapping
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         label.textAlignment = .left
         return label
     }()
 
-    private lazy var author: UILabel = {
+    private var author: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.lineBreakMode =  .byWordWrapping
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         label.textAlignment = .left
         return label
     }()
@@ -121,7 +121,7 @@ extension PhotoDetailsViewController {
             imageDescription.leadingAnchor.constraint(equalTo: textOverlayView.leadingAnchor, constant: 8),
             imageDescription.trailingAnchor.constraint(equalTo: textOverlayView.trailingAnchor, constant: -8),
 
-            author.topAnchor.constraint(equalTo: imageDescription.bottomAnchor, constant: 4),
+            author.topAnchor.constraint(equalTo: imageDescription.bottomAnchor, constant: 8),
             author.leadingAnchor.constraint(equalTo: textOverlayView.leadingAnchor, constant: 8),
             author.trailingAnchor.constraint(equalTo: textOverlayView.trailingAnchor, constant: -8),
             author.bottomAnchor.constraint(equalTo: textOverlayView.bottomAnchor, constant: -8)

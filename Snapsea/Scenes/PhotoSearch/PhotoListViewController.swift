@@ -25,9 +25,16 @@ final class PhotoListViewController: UIViewController {
 
     private let params: GeometricParams = GeometricParams(cellCount: 2,
                                                           leftInset: 16,
-                                                          rightInset: 0,
+                                                          rightInset: 16,
                                                           cellSpacing: 7)
 
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMMM yyyy"
+        formatter.locale = Locale(identifier: "ru_RU")
+        return formatter
+    }()
+    
     lazy var activityIndicator = UIActivityIndicatorView()
 
     private let searchController: UISearchController = {
@@ -68,6 +75,17 @@ final class PhotoListViewController: UIViewController {
         label.text = "Ничего не найдено"
         label.textColor = .black
         label.isHidden = true
+        return label
+    }()
+
+    private let welcomeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Добро пожаловать в SnapSea!"
+        label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+        label.textColor = .black
+        label.textAlignment = .center
+        label.numberOfLines = 2
+        label.alpha = 0
         return label
     }()
 
@@ -121,12 +139,22 @@ extension PhotoListViewController {
         suggestionsTableView.delegate = self
         suggestionsTableView.dataSource = self
 
-        [photosCollection, emptyLabel, suggestionsTableView, activityIndicator].forEach {
+        [photosCollection, 
+         emptyLabel,
+         suggestionsTableView,
+         activityIndicator,
+         welcomeLabel
+        ].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
         NSLayoutConstraint.activate([
+            welcomeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            welcomeLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            welcomeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            welcomeLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 
@@ -143,6 +171,10 @@ extension PhotoListViewController {
             photosCollection.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             photosCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+
+        UIView.animate(withDuration: 1.5, delay: 0.5, options: .curveEaseInOut, animations: {
+             self.welcomeLabel.alpha = 1
+         })
 
         setUpSearchBar()
     }
@@ -328,6 +360,8 @@ extension PhotoListViewController: UISearchResultsUpdating {
 extension PhotoListViewController: PhotoListView {
     func fetchPhotos(_ photos: [Photo]) {
         self.photos = photos
+
+        welcomeLabel.isHidden = true
 
         if self.photos.count != 0 {
             emptyLabel.isHidden = true

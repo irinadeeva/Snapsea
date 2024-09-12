@@ -18,7 +18,7 @@ struct Photo {
     let description: String
     let author: String
 //    let likes: Int?
-//    let createdDate: String?
+    let createdDate: String?
 
 //    init(from photo: PhotoResultResponse) {
 //        guard let description = photo.description,
@@ -38,11 +38,12 @@ struct Photo {
 //        self.author = author
 //    }
 
-    init(id: String, smallImageURL: String, thumbImageURL: String, description: String, author: String) {
+    init(id: String, smallImageURL: String, thumbImageURL: String, description: String, author: String, createdDate: String) {
         self.id = id
         self.smallImageURL = smallImageURL
         self.thumbImageURL = thumbImageURL
         self.description = description
         self.author = author
+        self.createdDate = createdDate
     }
 }
