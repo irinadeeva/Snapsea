@@ -12,14 +12,14 @@ class SuggestedHintTableViewCell: UITableViewCell {
 
     private lazy var cellLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .textColor
         return label
     }()
 
     private lazy var search: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "magnifyingglass")
-        imageView.tintColor = .black
+        imageView.tintColor = .textColor
         return imageView
     }()
 
@@ -28,8 +28,7 @@ class SuggestedHintTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-        contentView.backgroundColor = .white
-
+        contentView.backgroundColor = .background
         setupUI()
     }
 

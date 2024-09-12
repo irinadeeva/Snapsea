@@ -80,7 +80,7 @@ final class PhotoDetailsViewController: UIViewController {
 extension PhotoDetailsViewController {
 
     private func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = .background
 
         let backButton = UIBarButtonItem(
                     image: UIImage(systemName: "chevron.left"),

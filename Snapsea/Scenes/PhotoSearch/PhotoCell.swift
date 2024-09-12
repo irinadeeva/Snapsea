@@ -30,7 +30,7 @@ final class PhotoCell: UICollectionViewCell {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-        label.textColor = .black
+        label.textColor = .textColor
         label.numberOfLines = 2
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .left
@@ -69,7 +69,7 @@ extension PhotoCell {
     }
 
     private func setupUI() {
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = .background
 
         [imageView, textOverlayView, dataLabel, descriptionLabel].forEach {
             contentView.addSubview($0)

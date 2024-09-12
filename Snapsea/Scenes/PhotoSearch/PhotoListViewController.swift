@@ -43,18 +43,6 @@ final class PhotoListViewController: UIViewController {
         return searchController
     }()
 
-
-
-    //    private lazy var sortButton: UIButton = {
-    //        let button = UIButton()
-    //        button.setImage(UIImage(named: "sort")?
-    //            .withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
-    //        button.addTarget(self, action: #selector(didTapSortButton), for: .touchUpInside)
-    //        return button
-    //    }()
-
-
-
     private lazy var photosCollection: UICollectionView = {
         let collectionView = UICollectionView(
             frame: .zero,
@@ -66,14 +54,14 @@ final class PhotoListViewController: UIViewController {
             forCellWithReuseIdentifier: PhotoCell.identifier)
 
         collectionView.isScrollEnabled = true
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .background
         return collectionView
     }()
 
     private let emptyLabel: UILabel = {
         let label = UILabel()
         label.text = "Ничего не найдено"
-        label.textColor = .black
+        label.textColor = .textColor
         label.isHidden = true
         return label
     }()
@@ -82,7 +70,7 @@ final class PhotoListViewController: UIViewController {
         let label = UILabel()
         label.text = "Добро пожаловать в SnapSea!"
         label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
-        label.textColor = .black
+        label.textColor = .textColor
         label.textAlignment = .center
         label.numberOfLines = 2
         label.alpha = 0
@@ -91,7 +79,7 @@ final class PhotoListViewController: UIViewController {
 
     private let suggestionsTableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .background
         tableView.isHidden = true
         tableView.isScrollEnabled = false
         tableView.register(SuggestedHintTableViewCell.self, forCellReuseIdentifier: SuggestedHintTableViewCell.identifier)
@@ -117,21 +105,7 @@ final class PhotoListViewController: UIViewController {
 extension PhotoListViewController {
 
     private func setupUI() {
-        view.backgroundColor = .white
-
-        //        let sortButton = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(didTapSortButton))
-        //
-        //        let sortButton = UIBarButtonItem(customView: sortButton)
-        //        navigationItem.rightBarButtonItem = sortButton
-
-        //        if let navBar = navigationController?.navigationBar {
-        //
-        //            let rightButton = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(didTapSortButton))
-        //
-        ////            rightButton.tintColor = .black
-        //
-        //            navBar.topItem?.rightBarButtonItem = rightButton
-        //        }
+        view.backgroundColor = .background
 
         photosCollection.delegate = self
         photosCollection.dataSource = self
@@ -200,27 +174,6 @@ extension PhotoListViewController {
         suggestionsTableView.reloadData()
 
     }
-
-    //    @objc private func didTapSortButton() {
-    //        let alert = UIAlertController(title: "Сортировка", message: nil, preferredStyle: .actionSheet)
-    //
-    //        alert.addAction(UIAlertAction(title: "По популярности", style: .default, handler: { [weak self] (_) in
-    //            guard let self else { return }
-    //
-    ////            self.presenter.sortByLikes(self.photos)
-    //        }))
-    //
-    ////        alert.addAction(UIAlertAction(title: "По дате размещения", style: .default, handler: { [weak self] (_) in
-    ////            guard let self else { return }
-    ////
-    ////            self.presenter.sortByCreatedDate(self.photos)
-    ////        }))
-    //
-    //        alert.addAction(UIAlertAction(title: "Закрыть", style: .cancel, handler: { (_) in
-    //        }))
-    //
-    //        self.present(alert, animated: true)
-    //    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -348,7 +301,6 @@ extension PhotoListViewController: UISearchResultsUpdating {
 
             return
         }
-
 
         photosCollection.isHidden = true
         suggestionsTableView.isHidden = false

@@ -12,8 +12,6 @@ protocol PhotoListPresenter {
     func fetchHints() -> [String]
     func fetchPhotosNextPage()
     func getCachedImage(for url: String) -> Data?
-    //    func sortByLikes(_ loadedPhotos: [Photo])
-    //    func sortByCreatedDate(_ loadedPhotos: [Photo])
 }
 
 final class PhotoListPresenterImpl: PhotoListPresenter {
@@ -65,22 +63,6 @@ final class PhotoListPresenterImpl: PhotoListPresenter {
     func getCachedImage(for url: String) -> Data? {
         return imageCache.object(forKey: url as NSString) as Data?
     }
-
-    //    func sortByLikes(_ loadedPhotos: [Photo]) {
-    //        let sortedPhotos = loadedPhotos.sorted{
-    //            $0.likes < $1.likes
-    //        }
-    //
-    //        view?.fetchPhotos(sortedPhotos)
-    //    }
-
-    //    func sortByCreatedDate(_ loadedPhotos: [Photo]) {
-    //        let sortedPhotos = loadedPhotos.sorted{
-    //            $0.createdAt < $1.createdAt
-    //        }
-    //
-    //        view?.fetchPhotos(sortedPhotos)
-    //    }
 
     private func stateDidChanged() {
         switch state {

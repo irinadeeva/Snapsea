@@ -14,7 +14,11 @@ extension NSMutableAttributedString {
         if foundRange.location != NSNotFound {
             addAttribute(
                 NSAttributedString.Key.foregroundColor,
-                value: UIColor.black,
+                value: UIColor { traits in
+                    return traits.userInterfaceStyle == .dark
+                    ? .white
+                    : .black
+                },
                 range: foundRange
             )
         }
