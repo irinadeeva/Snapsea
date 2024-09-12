@@ -13,14 +13,10 @@ protocol PhotoDetailsPresenter {
 }
 
 final class PhotoDetailsPresenterImpl: PhotoDetailsPresenter {
-
-    // MARK: - Properties
-
     weak var view: PhotoDetailsView?
     private let service: PhotoService
     private let id: String
     private var imageCache = NSCache<NSString, NSData>()
-
     private var state = State<Photo>.initial {
         didSet {
             stateDidChanged()
@@ -83,7 +79,7 @@ final class PhotoDetailsPresenterImpl: PhotoDetailsPresenter {
         let message: String
         switch error {
         case is NetworkClientError:
-            message = "Error.network"
+            message = "Проверьте соединение"
         default:
             message = "Error.unknown"
         }

@@ -10,24 +10,23 @@ import Foundation
 typealias PhotoCompletion = (Result<[Photo], Error>) -> Void
 
 protocol PhotoService {
-    func loadPhoto(for text: String, completion: @escaping PhotoCompletion)
+    func loadPhoto(for text: String, for page: Int, completion: @escaping PhotoCompletion)
     func fetchPhoto(with id: String) -> Photo?
 }
 
 final class PhotoServiceImpl: PhotoService {
-
     private let networkClient: NetworkClient
     private let storage: PhotoStorage
-    private var lastLoadedPage: Int = 0
+    private static let dateFormatterISO8601 = ISO8601DateFormatter()
 
     init(networkClient: NetworkClient, storage: PhotoStorage) {
         self.storage = storage
         self.networkClient = networkClient
     }
 
-    func loadPhoto(for text: String, completion: @escaping PhotoCompletion) {
+    func loadPhoto(for text: String, for page: Int, completion: @escaping PhotoCompletion) {
+        let request = PhotoRequest(text: text, page: page)
 
-        let request = PhotoRequest(text: text, page: lastLoadedPage)
         networkClient.send(request: request, type: SearchedPhotoResultResponse.self) { [weak self] result in
             switch result {
             case .success(let data):
@@ -46,7 +45,6 @@ final class PhotoServiceImpl: PhotoService {
             }
         }
 
-        lastLoadedPage += 1
     }
 
     func fetchPhoto(with id: String) -> Photo? {
@@ -57,10 +55,22 @@ final class PhotoServiceImpl: PhotoService {
         guard let description = photo.description,
               let author = photo.user.name,
               let small = photo.urls.small,
-              let thumb = photo.urls.thumb
-        else {
+              let thumb = photo.urls.thumb,
+              let createdAtString = photo.createdAt else {
             return nil
         }
-        return Photo(id: photo.id, smallImageURL: small.absoluteString, thumbImageURL: thumb.absoluteString, description: description, author: author)
+
+        guard let createdAt = Self.dateFormatterISO8601.date(from: createdAtString) else {
+            return nil
+        }
+
+        let data =  DateFormatter.russianDateFormatter.string(from: createdAt)
+
+        return Photo(id: photo.id,
+                     smallImageURL: small.absoluteString,
+                     thumbImageURL: thumb.absoluteString,
+                     description: description,
+                     author: author,
+                     createdDate: data)
     }
 }

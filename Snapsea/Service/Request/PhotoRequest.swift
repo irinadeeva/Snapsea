@@ -8,7 +8,6 @@
 import Foundation
 
 struct PhotoRequest: NetworkRequest {
-
     var endpoint = "\(RequestConstants.baseURL)/search/photos/"
 
     var httpMethod: HttpMethod { .get }
@@ -17,12 +16,11 @@ struct PhotoRequest: NetworkRequest {
         [URLQueryItem(name: "client_id", value: RequestConstants.token),
          URLQueryItem(name: "query", value: text),
          URLQueryItem(name: "page", value: String(page)),
-         URLQueryItem(name: "per_page", value: String(20))
+         URLQueryItem(name: "per_page", value: String(30))
         ]
     }
 
     let text: String
 
     let page: Int
-
 }

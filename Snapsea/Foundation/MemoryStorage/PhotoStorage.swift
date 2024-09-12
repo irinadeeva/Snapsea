@@ -28,5 +28,4 @@ final class PhotoStorageImpl: PhotoStorage {
             storage[id]
         }
     }
-
 }

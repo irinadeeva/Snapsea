@@ -108,8 +108,6 @@ struct DefaultNetworkClient: NetworkClient {
         }
     }
 
-    // MARK: - Private
-
     private func create(request: NetworkRequest) -> URLRequest? {
 
         guard var urlComponents = URLComponents(string: request.endpoint) else { return nil }

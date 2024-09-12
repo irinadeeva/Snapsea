@@ -7,7 +7,6 @@
 
 import UIKit
 
-// MARK: - Protocol
 protocol PhotoListView: AnyObject, ErrorView, LoadingView {
     func fetchPhotos(_ photos: [Photo])
 }
@@ -15,6 +14,9 @@ protocol PhotoListView: AnyObject, ErrorView, LoadingView {
 final class PhotoListViewController: UIViewController {
 
     weak var coordinator: MainCoordinator?
+
+    private var hints: [String] = []
+    private var query: String = ""
 
     private var photos: [Photo] = []
 
@@ -33,16 +35,6 @@ final class PhotoListViewController: UIViewController {
         return searchController
     }()
 
-//    private lazy var sortButton: UIButton = {
-//        let button = UIButton()
-//        button.setImage(UIImage(named: "sort")?
-//            .withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
-//        button.addTarget(self, action: #selector(didTapSortButton), for: .touchUpInside)
-//        return button
-//    }()
-
-
-
     private lazy var photosCollection: UICollectionView = {
         let collectionView = UICollectionView(
             frame: .zero,
@@ -54,16 +46,37 @@ final class PhotoListViewController: UIViewController {
             forCellWithReuseIdentifier: PhotoCell.identifier)
 
         collectionView.isScrollEnabled = true
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .background
         return collectionView
     }()
 
-    private let emptyLabel: UILabel = {
+    private lazy var emptyLabel: UILabel = {
         let label = UILabel()
         label.text = "Ничего не найдено"
-        label.textColor = .black
+        label.textColor = .textColor
         label.isHidden = true
         return label
+    }()
+
+    private let welcomeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Добро пожаловать в SnapSea!"
+        label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+        label.textColor = .textColor
+        label.textAlignment = .center
+        label.numberOfLines = 2
+        label.alpha = 0
+        return label
+    }()
+
+    private lazy var suggestionsTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .background
+        tableView.isHidden = true
+        tableView.isScrollEnabled = false
+        tableView.register(SuggestedHintTableViewCell.self,
+                           forCellReuseIdentifier: SuggestedHintTableViewCell.identifier)
+        return tableView
     }()
 
     init(presenter: PhotoListPresenter) {
@@ -74,7 +87,7 @@ final class PhotoListViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -85,33 +98,37 @@ final class PhotoListViewController: UIViewController {
 extension PhotoListViewController {
 
     private func setupUI() {
-        view.backgroundColor = .white
-
-//        let sortButton = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(didTapSortButton))
-//
-//        let sortButton = UIBarButtonItem(customView: sortButton)
-//        navigationItem.rightBarButtonItem = sortButton
-
-//        if let navBar = navigationController?.navigationBar {
-//            
-//            let rightButton = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(didTapSortButton))
-//
-////            rightButton.tintColor = .black
-//
-//            navBar.topItem?.rightBarButtonItem = rightButton
-//        }
+        view.backgroundColor = .background
 
         photosCollection.delegate = self
         photosCollection.dataSource = self
 
-        [photosCollection, emptyLabel, activityIndicator].forEach {
+        suggestionsTableView.delegate = self
+        suggestionsTableView.dataSource = self
+
+        [photosCollection,
+         emptyLabel,
+         suggestionsTableView,
+         activityIndicator,
+         welcomeLabel
+        ].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 
         NSLayoutConstraint.activate([
+            welcomeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            welcomeLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            welcomeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            welcomeLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+
+            suggestionsTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            suggestionsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            suggestionsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            suggestionsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
             emptyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emptyLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -122,37 +139,41 @@ extension PhotoListViewController {
             photosCollection.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
 
+        UIView.animate(withDuration: 1.5, delay: 0.5, options: .curveEaseInOut, animations: {
+            self.welcomeLabel.alpha = 1
+        })
+
         setUpSearchBar()
     }
 
     private func setUpSearchBar() {
         searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
     }
 
-//    @objc private func didTapSortButton() {
-//        let alert = UIAlertController(title: "Сортировка", message: nil, preferredStyle: .actionSheet)
-//
-//        alert.addAction(UIAlertAction(title: "По популярности", style: .default, handler: { [weak self] (_) in
-//            guard let self else { return }
-//
-////            self.presenter.sortByLikes(self.photos)
-//        }))
-//
-////        alert.addAction(UIAlertAction(title: "По дате размещения", style: .default, handler: { [weak self] (_) in
-////            guard let self else { return }
-////
-////            self.presenter.sortByCreatedDate(self.photos)
-////        }))
-//
-//        alert.addAction(UIAlertAction(title: "Закрыть", style: .cancel, handler: { (_) in
-//        }))
-//
-//        self.present(alert, animated: true)
-//    }
-}
+    private func updateSuggestions(for query: String) {
+        let searchHistory = presenter.fetchHints()
 
-// MARK: - UICollectionViewDataSource
+        let searchResults = searchHistory.filter { item in
+            item.localizedCaseInsensitiveContains(query)
+        }
+
+        self.query = query
+        hints = searchResults
+
+        suggestionsTableView.reloadData()
+    }
+
+    private func showAllSearchHistory()
+    {
+        let searchHistory = presenter.fetchHints()
+        hints = searchHistory
+        self.query = ""
+        suggestionsTableView.reloadData()
+    }
+
+}
 
 extension PhotoListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -171,8 +192,6 @@ extension PhotoListViewController: UICollectionViewDataSource {
         let cachedImage = presenter.getCachedImage(for: photo.thumbImageURL)
         if let imageData = cachedImage {
             cell.updateImage(with: imageData)
-        } else {
-            // TODO: Загрузить заглушку
         }
 
         cell.updateCell(with: photo)
@@ -188,8 +207,6 @@ extension PhotoListViewController: UICollectionViewDataSource {
         }
     }
 }
-
-// MARK: - UICollectionViewDelegateFlowLayout
 
 extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -209,48 +226,81 @@ extension PhotoListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         coordinator?.showDetails(of: photos[indexPath.row].id)
     }
+}
 
+extension PhotoListViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return hints.count
+    }
 
-    //TODO: an option for fetchPhotosNextPage()
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if photos.count > 0 {
-//            let offsetY = scrollView.contentOffset.y
-//            let contentHeight = scrollView.contentSize.height
-//            let height = scrollView.frame.size.height
-//
-//            // Если пользователь прокручивает к концу списка
-//            if offsetY > contentHeight - height {
-//                self.presenter.fetchPhotosNextPage()
-//            }
-//        }
-//    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: SuggestedHintTableViewCell.identifier,
+            for: indexPath) as? SuggestedHintTableViewCell else {
+            return UITableViewCell()
+        }
+
+        if query.isEmpty {
+            cell.updateCell(with: hints[indexPath.row])
+        } else {
+            cell.set(term: hints[indexPath.row],
+                     searchedTerm: query)
+        }
+
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedSuggestion = hints[indexPath.row]
+        searchController.searchBar.text = selectedSuggestion
+        suggestionsTableView.isHidden = true
+        presenter.fetchPhotosFor(selectedSuggestion)
+    }
 }
 
 extension PhotoListViewController: UISearchBarDelegate {
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text, !text.isEmpty else { return }
         
-        presenter.findPhotosFor(text)
+        photosCollection.isHidden = false
+        suggestionsTableView.isHidden = true
+        
+        presenter.fetchPhotosFor(text)
     }
+}
 
-//    // Выполнение поиска по нажатию кнопки "Поиск"
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        guard let text = searchBar.text, !text.isEmpty else { return }
-//        print("Performing search for: \(text)")  // Для тестирования
-//        presenter.findPhotosFor(text)
-//    }
+extension PhotoListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else {
+            return
+        }
+
+        photosCollection.isHidden = true
+        suggestionsTableView.isHidden = false
+
+        if !searchText.isEmpty {
+            updateSuggestions(for: searchText)
+        } else {
+            showAllSearchHistory()
+        }
+    }
 }
 
 extension PhotoListViewController: PhotoListView {
     func fetchPhotos(_ photos: [Photo]) {
         self.photos = photos
 
+        welcomeLabel.isHidden = true
+
         if self.photos.count != 0 {
             emptyLabel.isHidden = true
+            suggestionsTableView.isHidden = true
             photosCollection.isHidden = false
             photosCollection.reloadData()
         } else {
             emptyLabel.isHidden = false
+            suggestionsTableView.isHidden = true
             photosCollection.isHidden = true
         }
     }

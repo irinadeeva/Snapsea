@@ -8,7 +8,6 @@
 import Foundation
 
 final class ServicesAssembly {
-
     private let networkClient: NetworkClient
     private let photoStorage: PhotoStorage
 
