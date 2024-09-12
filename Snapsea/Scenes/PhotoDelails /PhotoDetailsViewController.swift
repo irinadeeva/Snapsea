@@ -107,7 +107,7 @@ extension PhotoDetailsViewController {
 //            imageView.loadImage(from: imageURL)
 //        }
         imageDescription.text = photo.description ?? "description"
-        author.text = "Author"
+        author.text = photo.author ?? "Author"
 
         DispatchQueue.main.async { [weak self] in
             let cachedImage = self?.presenter.getCachedImage(for: photo.smallImageURL)

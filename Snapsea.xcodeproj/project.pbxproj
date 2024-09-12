@@ -11,6 +11,7 @@
 		BEBC96142C925AF700663D96 /* ProfileDetailsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC96132C925AF700663D96 /* ProfileDetailsAssembly.swift */; };
 		BEBC96162C925B3600663D96 /* PhotoDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC96152C925B3600663D96 /* PhotoDetailsPresenter.swift */; };
 		BEBC96182C925C2800663D96 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC96172C925C2800663D96 /* State.swift */; };
+		BEBC961A2C92DEC200663D96 /* UserResultRespond.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC96192C92DEC200663D96 /* UserResultRespond.swift */; };
 		BEFCE1D62C8F5CF80036E793 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCE1D52C8F5CF80036E793 /* SceneDelegate.swift */; };
 		BEFCE1DD2C8F5CFA0036E793 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEFCE1DC2C8F5CFA0036E793 /* Assets.xcassets */; };
 		BEFCE1E02C8F5CFA0036E793 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = BEFCE1DF2C8F5CFA0036E793 /* Base */; };
@@ -76,6 +77,7 @@
 		BEBC96132C925AF700663D96 /* ProfileDetailsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailsAssembly.swift; sourceTree = "<group>"; };
 		BEBC96152C925B3600663D96 /* PhotoDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsPresenter.swift; sourceTree = "<group>"; };
 		BEBC96172C925C2800663D96 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		BEBC96192C92DEC200663D96 /* UserResultRespond.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResultRespond.swift; sourceTree = "<group>"; };
 		BEFCE1D02C8F5CF80036E793 /* Snapsea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snapsea.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEFCE1D52C8F5CF80036E793 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BEFCE1DC2C8F5CFA0036E793 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				BEFCE24E2C9187540036E793 /* SearchedPhotoResultResponse.swift */,
 				BEFCE2522C918FAB0036E793 /* PhotoResultResponse.swift */,
 				BEFCE2502C918C690036E793 /* UrlsResultResponse.swift */,
+				BEBC96192C92DEC200663D96 /* UserResultRespond.swift */,
 				BEBC96172C925C2800663D96 /* State.swift */,
 			);
 			path = Models;
@@ -453,6 +456,7 @@
 				BEFCE2042C9039840036E793 /* Coordinator.swift in Sources */,
 				BEFCE2062C903D6C0036E793 /* MainCoordinator.swift in Sources */,
 				BEBC96122C924CFB00663D96 /* PhotoListViewController.swift in Sources */,
+				BEBC961A2C92DEC200663D96 /* UserResultRespond.swift in Sources */,
 				BEFCE21F2C90CC290036E793 /* NetworkRequest.swift in Sources */,
 				BEFCE2292C90CD640036E793 /* AppDelegate.swift in Sources */,
 				BEBC96182C925C2800663D96 /* State.swift in Sources */,

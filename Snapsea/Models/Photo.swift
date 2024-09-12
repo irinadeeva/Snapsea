@@ -16,6 +16,7 @@ struct Photo {
     let thumbImageURL: String
     let largeImageURL: String
     let description: String?
+    let author: String?
     let likes: Int?
     let createdDate: String?
 
@@ -29,5 +30,6 @@ struct Photo {
         self.description = photo.description
         self.likes = photo.likes
         self.createdDate = photo.createdAt
+        self.author = photo.user.name
     }
 }
