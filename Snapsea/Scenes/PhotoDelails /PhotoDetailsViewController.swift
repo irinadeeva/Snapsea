@@ -8,16 +8,12 @@
 import Foundation
 import UIKit
 
-
-// MARK: - Protocol
 protocol PhotoDetailsView: AnyObject, ErrorView, LoadingView {
     func fetchPhoto(_ photo: Photo)
 }
 
 final class PhotoDetailsViewController: UIViewController {
-
     weak var coordinator: MainCoordinator?
-    
     var activityIndicator = UIActivityIndicatorView()
 
     private var imageView: UIImageView = {
@@ -78,7 +74,6 @@ final class PhotoDetailsViewController: UIViewController {
 }
 
 extension PhotoDetailsViewController {
-
     private func setupUI() {
         view.backgroundColor = .background
 
@@ -146,7 +141,6 @@ extension PhotoDetailsViewController {
     }
 
     private func updateUI(with photo: Photo) {
-
         let cachedImage = presenter.getCachedImage(for: photo.smallImageURL)
 
         if let imageData = cachedImage {
@@ -162,7 +156,6 @@ extension PhotoDetailsViewController {
 }
 
 extension PhotoDetailsViewController: PhotoDetailsView {
-
     func fetchPhoto(_ photo: Photo) {
         loadedPhoto = photo
         if let loadedPhoto {

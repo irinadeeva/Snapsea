@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 final class MainCoordinator: Coordinator {
-    
     var servicesAssembly: ServicesAssembly
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController

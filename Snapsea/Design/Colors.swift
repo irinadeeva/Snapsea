@@ -13,6 +13,7 @@ extension UIColor {
         var int = UInt64()
         Scanner(string: hex).scanHexInt64(&int)
         let alpha, red, green, blue: UInt64
+
         switch hex.count {
         case 3: // RGB (12-bit)
             (alpha, red, green, blue) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
@@ -23,6 +24,7 @@ extension UIColor {
         default:
             (alpha, red, green, blue) = (255, 0, 0, 0)
         }
+
         self.init(
             red: CGFloat(red) / 255,
             green: CGFloat(green) / 255,

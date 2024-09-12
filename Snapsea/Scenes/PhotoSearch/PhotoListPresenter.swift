@@ -15,12 +15,13 @@ protocol PhotoListPresenter {
 }
 
 final class PhotoListPresenterImpl: PhotoListPresenter {
-
-    // MARK: - Properties
-
     weak var view: PhotoListView?
     private let service: PhotoService
     private var searchText = ""
+    private var loadedPhotos: [Photo] = []
+    private var imageCache = NSCache<NSString, NSData>()
+    private var lastLoadedPage: Int = 0
+
     private var searchHistory: [String] = [] {
         didSet {
             if searchHistory.count > 5 {
@@ -28,9 +29,6 @@ final class PhotoListPresenterImpl: PhotoListPresenter {
             }
         }
     }
-    private var loadedPhotos: [Photo] = []
-    private var imageCache = NSCache<NSString, NSData>()
-    private var lastLoadedPage: Int = 0
 
     private var state = State<[Photo]>.initial {
         didSet {
@@ -101,7 +99,7 @@ final class PhotoListPresenterImpl: PhotoListPresenter {
 
         for photo in photos {
             if let imageURL = URL(string: photo.thumbImageURL),
-                imageCache.object(forKey: photo.thumbImageURL as NSString) == nil {
+               imageCache.object(forKey: photo.thumbImageURL as NSString) == nil {
                 dispatchGroup.enter()
                 DispatchQueue.global().async {
                     if let imageData = try? Data(contentsOf: imageURL) {

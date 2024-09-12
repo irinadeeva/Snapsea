@@ -7,7 +7,6 @@
 
 import UIKit
 
-// MARK: - Protocol
 protocol PhotoListView: AnyObject, ErrorView, LoadingView {
     func fetchPhotos(_ photos: [Photo])
 }
@@ -176,8 +175,6 @@ extension PhotoListViewController {
     }
 }
 
-// MARK: - UICollectionViewDataSource
-
 extension PhotoListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photos.count
@@ -195,8 +192,6 @@ extension PhotoListViewController: UICollectionViewDataSource {
         let cachedImage = presenter.getCachedImage(for: photo.thumbImageURL)
         if let imageData = cachedImage {
             cell.updateImage(with: imageData)
-        } else {
-            // TODO: Загрузить заглушку
         }
 
         cell.updateCell(with: photo)
@@ -212,8 +207,6 @@ extension PhotoListViewController: UICollectionViewDataSource {
         }
     }
 }
-
-// MARK: - UICollectionViewDelegateFlowLayout
 
 extension PhotoListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
