@@ -137,6 +137,7 @@ extension PhotoDetailsViewController {
             activityItems: [imageToShare],
             applicationActivities: nil
         )
+        
         present(activityViewController, animated: true, completion: nil)
     }
 

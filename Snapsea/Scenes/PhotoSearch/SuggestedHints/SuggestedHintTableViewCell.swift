@@ -10,13 +10,13 @@ import UIKit
 class SuggestedHintTableViewCell: UITableViewCell {
     static let identifier = "SuggestionCell"
 
-    private lazy var cellLabel: UILabel = {
+    private var cellLabel: UILabel = {
         let label = UILabel()
         label.textColor = .textColor
         return label
     }()
 
-    private lazy var search: UIImageView = {
+    private var search: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "magnifyingglass")
         imageView.tintColor = .textColor
@@ -32,6 +32,11 @@ class SuggestedHintTableViewCell: UITableViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func updateCell(with text: String) {
+        cellLabel.text = text
+        print("cellLabel.text = text")
     }
 
     func set(term: String, searchedTerm: String) {

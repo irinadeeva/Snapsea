@@ -15,6 +15,7 @@ final class PhotoCell: UICollectionViewCell {
         imageView.layer.cornerRadius = 6
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
+        imageView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
         return imageView
     }()
 
@@ -58,7 +59,6 @@ final class PhotoCell: UICollectionViewCell {
 }
 
 extension PhotoCell {
-
     func updateImage(with data: Data) {
         imageView.image =  UIImage(data: data) ?? UIImage()
     }

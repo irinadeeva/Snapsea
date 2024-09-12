@@ -79,7 +79,7 @@ final class PhotoDetailsPresenterImpl: PhotoDetailsPresenter {
         let message: String
         switch error {
         case is NetworkClientError:
-            message = "Error.network"
+            message = "Проверьте соединение"
         default:
             message = "Error.unknown"
         }

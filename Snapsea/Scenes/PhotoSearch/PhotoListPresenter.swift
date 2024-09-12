@@ -45,6 +45,7 @@ final class PhotoListPresenterImpl: PhotoListPresenter {
         if !searchHistory.contains(text) {
             searchHistory.append(text)
         }
+        loadedPhotos = []
         lastLoadedPage = 0
         state = .loading
     }
@@ -71,12 +72,10 @@ final class PhotoListPresenterImpl: PhotoListPresenter {
             view?.showLoadingAndBlockUI()
             loadPhoto()
         case .data(let photos):
-            view?.fetchPhotos(photos)
-            //TODO: doesnt work
+            view?.fetchPhotos(self.loadedPhotos)
             view?.hideLoadingAndUnblockUI()
         case .failed(let error):
             let errorModel = makeErrorModel(error)
-            //TODO: doesnt work
             view?.hideLoadingAndUnblockUI()
             view?.showError(errorModel)
         }
@@ -123,7 +122,7 @@ final class PhotoListPresenterImpl: PhotoListPresenter {
         let message: String
         switch error {
         case is NetworkClientError:
-            message = "Error.network"
+            message = "Проверьте соединение"
         default:
             message = "Error.unknown"
         }

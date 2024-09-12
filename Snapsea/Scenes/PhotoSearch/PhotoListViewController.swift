@@ -27,13 +27,6 @@ final class PhotoListViewController: UIViewController {
                                                           rightInset: 16,
                                                           cellSpacing: 7)
 
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd MMMM yyyy"
-        formatter.locale = Locale(identifier: "ru_RU")
-        return formatter
-    }()
-    
     lazy var activityIndicator = UIActivityIndicatorView()
 
     private let searchController: UISearchController = {
@@ -57,7 +50,7 @@ final class PhotoListViewController: UIViewController {
         return collectionView
     }()
 
-    private let emptyLabel: UILabel = {
+    private lazy var emptyLabel: UILabel = {
         let label = UILabel()
         label.text = "Ничего не найдено"
         label.textColor = .textColor
@@ -76,12 +69,13 @@ final class PhotoListViewController: UIViewController {
         return label
     }()
 
-    private let suggestionsTableView: UITableView = {
+    private lazy var suggestionsTableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .background
         tableView.isHidden = true
         tableView.isScrollEnabled = false
-        tableView.register(SuggestedHintTableViewCell.self, forCellReuseIdentifier: SuggestedHintTableViewCell.identifier)
+        tableView.register(SuggestedHintTableViewCell.self,
+                           forCellReuseIdentifier: SuggestedHintTableViewCell.identifier)
         return tableView
     }()
 
@@ -112,7 +106,7 @@ extension PhotoListViewController {
         suggestionsTableView.delegate = self
         suggestionsTableView.dataSource = self
 
-        [photosCollection, 
+        [photosCollection,
          emptyLabel,
          suggestionsTableView,
          activityIndicator,
@@ -146,8 +140,8 @@ extension PhotoListViewController {
         ])
 
         UIView.animate(withDuration: 1.5, delay: 0.5, options: .curveEaseInOut, animations: {
-             self.welcomeLabel.alpha = 1
-         })
+            self.welcomeLabel.alpha = 1
+        })
 
         setUpSearchBar()
     }
@@ -161,7 +155,6 @@ extension PhotoListViewController {
     private func updateSuggestions(for query: String) {
         let searchHistory = presenter.fetchHints()
 
-
         let searchResults = searchHistory.filter { item in
             item.localizedCaseInsensitiveContains(query)
         }
@@ -169,10 +162,19 @@ extension PhotoListViewController {
         self.query = query
         hints = searchResults
 
-
         suggestionsTableView.reloadData()
-
     }
+
+    private func showAllSearchHistory()
+    {
+        let searchHistory = presenter.fetchHints()
+        // Показываем все элементы истории
+        hints = searchHistory
+        print(hints)
+        self.query = ""
+        suggestionsTableView.reloadData()
+    }
+
 }
 
 extension PhotoListViewController: UICollectionViewDataSource {
@@ -226,21 +228,6 @@ extension PhotoListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         coordinator?.showDetails(of: photos[indexPath.row].id)
     }
-
-
-    //TODO: an option for fetchPhotosNextPage()
-    //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    //        if photos.count > 0 {
-    //            let offsetY = scrollView.contentOffset.y
-    //            let contentHeight = scrollView.contentSize.height
-    //            let height = scrollView.frame.size.height
-    //
-    //            // Если пользователь прокручивает к концу списка
-    //            if offsetY > contentHeight - height {
-    //                self.presenter.fetchPhotosNextPage()
-    //            }
-    //        }
-    //    }
 }
 
 extension PhotoListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -255,8 +242,14 @@ extension PhotoListViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
 
-        cell.set(term: hints[indexPath.row],
-                 searchedTerm: query)
+        print(query)
+        if query.isEmpty {
+            print(query.isEmpty)
+            cell.updateCell(with: hints[indexPath.row])
+        } else {
+            cell.set(term: hints[indexPath.row],
+                     searchedTerm: query)
+        }
 
         return cell
     }
@@ -270,35 +263,50 @@ extension PhotoListViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension PhotoListViewController: UISearchBarDelegate {
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        guard let text = searchBar.text, !text.isEmpty else { return }
+    // Этот метод срабатывает, когда курсор попадает в поисковую строку
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+//        print("Search bar did begin editing")
+//        photosCollection.isHidden = true
+//        suggestionsTableView.isHidden = false
+//
+//        // Показываем всю историю при фокусировке
+//
+//        showAllSearchHistory()
+    }
 
-        presenter.fetchPhotosFor(text)
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+//
+
     }
 
     // Выполнение поиска по нажатию кнопки "Поиск"
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        //            guard let text = searchBar.text, !text.isEmpty else { return }
-        //            print("Performing search for: \(text)")  // Для тестирования
-        //            presenter.findPhotosFor(text)
-        //            photosCollection.isHidden = false
-        //            suggestionsTableView.isHidden = true
+        print("search Bar Search Button Clicked")
+        guard let text = searchBar.text, !text.isEmpty else { return }
+
+        presenter.fetchPhotosFor(text)
     }
 }
 
 extension PhotoListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let searchText = searchController.searchBar.text, !searchText.isEmpty else {
-            photosCollection.isHidden = false
-            suggestionsTableView.isHidden = true
-
+        print("Uspdate Search Results")
+        guard let searchText = searchController.searchBar.text else {
             return
         }
 
-        photosCollection.isHidden = true
-        suggestionsTableView.isHidden = false
+        if !searchText.isEmpty {
+            photosCollection.isHidden = true
+            suggestionsTableView.isHidden = false
 
-        updateSuggestions(for: searchText)
+            updateSuggestions(for: searchText)
+        } else {
+            photosCollection.isHidden = true
+            suggestionsTableView.isHidden = false
+
+            showAllSearchHistory()
+        }
+
     }
 }
 
