@@ -8,5 +8,5 @@
 import Foundation
 
 struct UserResultResponse: Decodable {
-    let name: String
+    let name: String?
 }

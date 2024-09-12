@@ -28,16 +28,19 @@ final class PhotoServiceImpl: PhotoService {
     func loadPhoto(for text: String, completion: @escaping PhotoCompletion) {
 
         let request = PhotoRequest(text: text, page: lastLoadedPage)
-        networkClient.send(request: request, type: SearchedPhotoResultResponse.self) { [weak storage] result in
+        networkClient.send(request: request, type: SearchedPhotoResultResponse.self) { [weak self] result in
             switch result {
             case .success(let data):
-                let photos: [Photo] = data.results.map { photoResponse in
-                    let photo = Photo(from: photoResponse)
-                    storage?.savePhoto(photo)
-                    return photo
+
+                let validPhotos: [Photo] = data.results.compactMap { photoResponse in
+                    if let validPhoto = self?.isValidPhoto(photoResponse) {
+                        self?.storage.savePhoto(validPhoto)
+                        return validPhoto
+                    }
+                    return nil
                 }
 
-                completion(.success(photos))
+                completion(.success(validPhotos))
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -48,5 +51,16 @@ final class PhotoServiceImpl: PhotoService {
 
     func fetchPhoto(with id: String) -> Photo? {
         return storage.getPhoto(with: id)
+    }
+
+    private func isValidPhoto(_ photo: PhotoResultResponse) -> Photo? {
+        guard let description = photo.description,
+              let author = photo.user.name,
+              let small = photo.urls.small,
+              let thumb = photo.urls.thumb
+        else {
+            return nil
+        }
+        return Photo(id: photo.id, smallImageURL: small.absoluteString, thumbImageURL: thumb.absoluteString, description: description, author: author)
     }
 }

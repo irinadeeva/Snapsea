@@ -102,22 +102,16 @@ extension PhotoDetailsViewController {
     }
 
     private func updateUI(with photo: Photo) {
-//        if let imageURL = URL(string: photo.thumbImageURL) {
-//            // Load image from URL (use an image loading library or a custom method)
-//            imageView.loadImage(from: imageURL)
-//        }
-        imageDescription.text = photo.description ?? "description"
-        author.text = photo.author ?? "Author"
 
-        DispatchQueue.main.async { [weak self] in
-            let cachedImage = self?.presenter.getCachedImage(for: photo.smallImageURL)
-            if let imageData = cachedImage {
+        let cachedImage = presenter.getCachedImage(for: photo.smallImageURL)
 
-
-                self?.imageView.image = UIImage(data: imageData)
-            } else {
-                // TODO: Загрузить заглушку
-                self?.imageView.image = UIImage()
+        if let imageData = cachedImage {
+            if let image = UIImage(data: imageData) {
+                DispatchQueue.main.async { [weak self] in
+                    self?.imageView.image = image
+                    self?.imageDescription.text = photo.description
+                    self?.author.text = photo.author
+                }
             }
         }
     }
