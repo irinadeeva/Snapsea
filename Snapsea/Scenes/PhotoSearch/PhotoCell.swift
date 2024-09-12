@@ -15,6 +15,7 @@ final class PhotoCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 12
         imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
 
@@ -31,18 +32,12 @@ final class PhotoCell: UICollectionViewCell {
 
 extension PhotoCell {
 
+    func updateImage(with data: Data) {
+        cardImageView.image =  UIImage(data: data) ?? UIImage()
+    }
+
     func updateCell(with photo: Photo) {
-//        cardImageView.image = UIImage(named: "tmp")
-
-        var imageData = Data()
-        do {
-            imageData = try Data(contentsOf: photo.smallImageURL)
-            } catch {
-                        print("Failed to load image")
-        }
-        cardImageView.image =  UIImage(data: imageData) ?? UIImage()
-
-        print("from updateCell(with photo: Photo)")
+//       cardImageView.image = UIImage(named: "tmp")
     }
 
     private func setupUI() {

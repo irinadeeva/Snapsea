@@ -26,9 +26,14 @@ final class MainCoordinator: Coordinator {
         navigationController.pushViewController(vc, animated: false)
     }
 
-    func showDetails() {
-        let vc = PhotoDetails()
+    func showDetails(of id: String) {
+        let photoDetailsAssembly = PhotoDetailsAssembly(id: id, servicesAssembler: servicesAssembly)
+        let vc = photoDetailsAssembly.build()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: false)
+    }
+
+    func goBack() {
+        navigationController.popViewController(animated: true)
     }
 }

@@ -8,11 +8,15 @@ protocol LoadingView {
 
 extension LoadingView {
     func showLoading() {
-        activityIndicator.startAnimating()
+        DispatchQueue.main.async {
+            activityIndicator.startAnimating()
+        }
     }
 
     func hideLoading() {
-        activityIndicator.stopAnimating()
+        DispatchQueue.main.async {
+            activityIndicator.stopAnimating()
+        }
     }
 }
 
@@ -22,12 +26,16 @@ extension LoadingView {
     }
 
     func showLoadingAndBlockUI() {
-        Self.window?.isUserInteractionEnabled = false
-        activityIndicator.startAnimating()
+        DispatchQueue.main.async {
+            Self.window?.isUserInteractionEnabled = false
+            self.activityIndicator.startAnimating()
+        }
     }
 
     func hideLoadingAndUnblockUI() {
-        Self.window?.isUserInteractionEnabled = true
-        activityIndicator.stopAnimating()
+        DispatchQueue.main.async {
+            Self.window?.isUserInteractionEnabled = true
+            self.activityIndicator.stopAnimating()
+        }
     }
 }

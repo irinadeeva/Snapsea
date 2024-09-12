@@ -11,12 +11,14 @@ typealias PhotoCompletion = (Result<[Photo], Error>) -> Void
 
 protocol PhotoService {
     func loadPhoto(for text: String, completion: @escaping PhotoCompletion)
+    func fetchPhoto(with id: String) -> Photo?
 }
 
 final class PhotoServiceImpl: PhotoService {
 
     private let networkClient: NetworkClient
     private let storage: PhotoStorage
+    private var lastLoadedPage: Int = 0
 
     init(networkClient: NetworkClient, storage: PhotoStorage) {
         self.storage = storage
@@ -24,18 +26,14 @@ final class PhotoServiceImpl: PhotoService {
     }
 
     func loadPhoto(for text: String, completion: @escaping PhotoCompletion) {
-//        if let photo = storage.getPhoto(with: ) {
-//            completion(.success(Photo))
-//            return
-//        }
 
-        let request = PhotoRequest(text: text)
+        let request = PhotoRequest(text: text, page: lastLoadedPage)
         networkClient.send(request: request, type: SearchedPhotoResultResponse.self) { [weak storage] result in
             switch result {
             case .success(let data):
-//                storage?.savePhoto(data.results)
                 let photos: [Photo] = data.results.map { photoResponse in
                     let photo = Photo(from: photoResponse)
+                    storage?.savePhoto(photo)
                     return photo
                 }
 
@@ -44,5 +42,11 @@ final class PhotoServiceImpl: PhotoService {
                 completion(.failure(error))
             }
         }
+
+        lastLoadedPage += 1
+    }
+
+    func fetchPhoto(with id: String) -> Photo? {
+        return storage.getPhoto(with: id)
     }
 }
