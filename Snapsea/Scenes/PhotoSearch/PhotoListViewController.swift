@@ -25,7 +25,7 @@ final class PhotoListViewController: UIViewController {
 
     private let params: GeometricParams = GeometricParams(cellCount: 2,
                                                           leftInset: 16,
-                                                          rightInset: 16,
+                                                          rightInset: 0,
                                                           cellSpacing: 7)
 
     lazy var activityIndicator = UIActivityIndicatorView()
