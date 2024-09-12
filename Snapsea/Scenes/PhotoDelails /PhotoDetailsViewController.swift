@@ -109,8 +109,8 @@ extension PhotoDetailsViewController {
             if let image = UIImage(data: imageData) {
                 DispatchQueue.main.async { [weak self] in
                     self?.imageView.image = image
-                    self?.imageDescription.text = photo.description ?? "description"
-                    self?.author.text = photo.author ?? "Author"
+                    self?.imageDescription.text = photo.description
+                    self?.author.text = photo.author
                 }
             }
         }

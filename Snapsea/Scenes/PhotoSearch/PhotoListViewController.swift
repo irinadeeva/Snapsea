@@ -247,6 +247,7 @@ extension PhotoListViewController: PhotoListView {
 
         if self.photos.count != 0 {
             emptyLabel.isHidden = true
+            photosCollection.isHidden = false
             photosCollection.reloadData()
         } else {
             emptyLabel.isHidden = false
