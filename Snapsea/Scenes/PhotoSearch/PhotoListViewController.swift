@@ -168,9 +168,7 @@ extension PhotoListViewController {
     private func showAllSearchHistory()
     {
         let searchHistory = presenter.fetchHints()
-        // Показываем все элементы истории
         hints = searchHistory
-        print(hints)
         self.query = ""
         suggestionsTableView.reloadData()
     }
@@ -242,9 +240,7 @@ extension PhotoListViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
 
-        print(query)
         if query.isEmpty {
-            print(query.isEmpty)
             cell.updateCell(with: hints[indexPath.row])
         } else {
             cell.set(term: hints[indexPath.row],
@@ -263,50 +259,31 @@ extension PhotoListViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension PhotoListViewController: UISearchBarDelegate {
-    // Этот метод срабатывает, когда курсор попадает в поисковую строку
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-//        print("Search bar did begin editing")
-//        photosCollection.isHidden = true
-//        suggestionsTableView.isHidden = false
-//
-//        // Показываем всю историю при фокусировке
-//
-//        showAllSearchHistory()
-    }
 
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-//
-
-    }
-
-    // Выполнение поиска по нажатию кнопки "Поиск"
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("search Bar Search Button Clicked")
         guard let text = searchBar.text, !text.isEmpty else { return }
-
+        
+        photosCollection.isHidden = false
+        suggestionsTableView.isHidden = true
+        
         presenter.fetchPhotosFor(text)
     }
 }
 
 extension PhotoListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        print("Uspdate Search Results")
         guard let searchText = searchController.searchBar.text else {
             return
         }
 
-        if !searchText.isEmpty {
-            photosCollection.isHidden = true
-            suggestionsTableView.isHidden = false
+        photosCollection.isHidden = true
+        suggestionsTableView.isHidden = false
 
+        if !searchText.isEmpty {
             updateSuggestions(for: searchText)
         } else {
-            photosCollection.isHidden = true
-            suggestionsTableView.isHidden = false
-
             showAllSearchHistory()
         }
-
     }
 }
 

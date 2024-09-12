@@ -36,7 +36,6 @@ class SuggestedHintTableViewCell: UITableViewCell {
 
     func updateCell(with text: String) {
         cellLabel.text = text
-        print("cellLabel.text = text")
     }
 
     func set(term: String, searchedTerm: String) {
