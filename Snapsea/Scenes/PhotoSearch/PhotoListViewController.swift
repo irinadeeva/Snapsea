@@ -16,6 +16,9 @@ final class PhotoListViewController: UIViewController {
 
     weak var coordinator: MainCoordinator?
 
+    private var hints: [String] = []
+    private var query: String = ""
+
     private var photos: [Photo] = []
 
     private let presenter: PhotoListPresenter
@@ -33,13 +36,15 @@ final class PhotoListViewController: UIViewController {
         return searchController
     }()
 
-//    private lazy var sortButton: UIButton = {
-//        let button = UIButton()
-//        button.setImage(UIImage(named: "sort")?
-//            .withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
-//        button.addTarget(self, action: #selector(didTapSortButton), for: .touchUpInside)
-//        return button
-//    }()
+
+
+    //    private lazy var sortButton: UIButton = {
+    //        let button = UIButton()
+    //        button.setImage(UIImage(named: "sort")?
+    //            .withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+    //        button.addTarget(self, action: #selector(didTapSortButton), for: .touchUpInside)
+    //        return button
+    //    }()
 
 
 
@@ -66,6 +71,15 @@ final class PhotoListViewController: UIViewController {
         return label
     }()
 
+    private let suggestionsTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .white
+        tableView.isHidden = true
+        tableView.isScrollEnabled = false
+        tableView.register(SuggestedHintTableViewCell.self, forCellReuseIdentifier: SuggestedHintTableViewCell.identifier)
+        return tableView
+    }()
+
     init(presenter: PhotoListPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -74,7 +88,7 @@ final class PhotoListViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -87,24 +101,27 @@ extension PhotoListViewController {
     private func setupUI() {
         view.backgroundColor = .white
 
-//        let sortButton = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(didTapSortButton))
-//
-//        let sortButton = UIBarButtonItem(customView: sortButton)
-//        navigationItem.rightBarButtonItem = sortButton
+        //        let sortButton = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(didTapSortButton))
+        //
+        //        let sortButton = UIBarButtonItem(customView: sortButton)
+        //        navigationItem.rightBarButtonItem = sortButton
 
-//        if let navBar = navigationController?.navigationBar {
-//            
-//            let rightButton = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(didTapSortButton))
-//
-////            rightButton.tintColor = .black
-//
-//            navBar.topItem?.rightBarButtonItem = rightButton
-//        }
+        //        if let navBar = navigationController?.navigationBar {
+        //
+        //            let rightButton = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(didTapSortButton))
+        //
+        ////            rightButton.tintColor = .black
+        //
+        //            navBar.topItem?.rightBarButtonItem = rightButton
+        //        }
 
         photosCollection.delegate = self
         photosCollection.dataSource = self
 
-        [photosCollection, emptyLabel, activityIndicator].forEach {
+        suggestionsTableView.delegate = self
+        suggestionsTableView.dataSource = self
+
+        [photosCollection, emptyLabel, suggestionsTableView, activityIndicator].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -112,6 +129,11 @@ extension PhotoListViewController {
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+
+            suggestionsTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            suggestionsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            suggestionsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            suggestionsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
             emptyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emptyLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -127,29 +149,46 @@ extension PhotoListViewController {
 
     private func setUpSearchBar() {
         searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
     }
 
-//    @objc private func didTapSortButton() {
-//        let alert = UIAlertController(title: "Сортировка", message: nil, preferredStyle: .actionSheet)
-//
-//        alert.addAction(UIAlertAction(title: "По популярности", style: .default, handler: { [weak self] (_) in
-//            guard let self else { return }
-//
-////            self.presenter.sortByLikes(self.photos)
-//        }))
-//
-////        alert.addAction(UIAlertAction(title: "По дате размещения", style: .default, handler: { [weak self] (_) in
-////            guard let self else { return }
-////
-////            self.presenter.sortByCreatedDate(self.photos)
-////        }))
-//
-//        alert.addAction(UIAlertAction(title: "Закрыть", style: .cancel, handler: { (_) in
-//        }))
-//
-//        self.present(alert, animated: true)
-//    }
+    private func updateSuggestions(for query: String) {
+        let searchHistory = presenter.fetchHints()
+
+
+        let searchResults = searchHistory.filter { item in
+            item.localizedCaseInsensitiveContains(query)
+        }
+
+        self.query = query
+        hints = searchResults
+
+
+        suggestionsTableView.reloadData()
+
+    }
+
+    //    @objc private func didTapSortButton() {
+    //        let alert = UIAlertController(title: "Сортировка", message: nil, preferredStyle: .actionSheet)
+    //
+    //        alert.addAction(UIAlertAction(title: "По популярности", style: .default, handler: { [weak self] (_) in
+    //            guard let self else { return }
+    //
+    ////            self.presenter.sortByLikes(self.photos)
+    //        }))
+    //
+    ////        alert.addAction(UIAlertAction(title: "По дате размещения", style: .default, handler: { [weak self] (_) in
+    ////            guard let self else { return }
+    ////
+    ////            self.presenter.sortByCreatedDate(self.photos)
+    ////        }))
+    //
+    //        alert.addAction(UIAlertAction(title: "Закрыть", style: .cancel, handler: { (_) in
+    //        }))
+    //
+    //        self.present(alert, animated: true)
+    //    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -212,33 +251,78 @@ extension PhotoListViewController: UICollectionViewDelegate {
 
 
     //TODO: an option for fetchPhotosNextPage()
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if photos.count > 0 {
-//            let offsetY = scrollView.contentOffset.y
-//            let contentHeight = scrollView.contentSize.height
-//            let height = scrollView.frame.size.height
-//
-//            // Если пользователь прокручивает к концу списка
-//            if offsetY > contentHeight - height {
-//                self.presenter.fetchPhotosNextPage()
-//            }
-//        }
-//    }
+    //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    //        if photos.count > 0 {
+    //            let offsetY = scrollView.contentOffset.y
+    //            let contentHeight = scrollView.contentSize.height
+    //            let height = scrollView.frame.size.height
+    //
+    //            // Если пользователь прокручивает к концу списка
+    //            if offsetY > contentHeight - height {
+    //                self.presenter.fetchPhotosNextPage()
+    //            }
+    //        }
+    //    }
+}
+
+extension PhotoListViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return hints.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: SuggestedHintTableViewCell.identifier,
+            for: indexPath) as? SuggestedHintTableViewCell else {
+            return UITableViewCell()
+        }
+
+        cell.set(term: hints[indexPath.row],
+                 searchedTerm: query)
+
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedSuggestion = hints[indexPath.row]
+        searchController.searchBar.text = selectedSuggestion
+        suggestionsTableView.isHidden = true
+        presenter.fetchPhotosFor(selectedSuggestion)
+    }
 }
 
 extension PhotoListViewController: UISearchBarDelegate {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         guard let text = searchBar.text, !text.isEmpty else { return }
-        
-        presenter.findPhotosFor(text)
+
+        presenter.fetchPhotosFor(text)
     }
 
-//    // Выполнение поиска по нажатию кнопки "Поиск"
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        guard let text = searchBar.text, !text.isEmpty else { return }
-//        print("Performing search for: \(text)")  // Для тестирования
-//        presenter.findPhotosFor(text)
-//    }
+    // Выполнение поиска по нажатию кнопки "Поиск"
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        //            guard let text = searchBar.text, !text.isEmpty else { return }
+        //            print("Performing search for: \(text)")  // Для тестирования
+        //            presenter.findPhotosFor(text)
+        //            photosCollection.isHidden = false
+        //            suggestionsTableView.isHidden = true
+    }
+}
+
+extension PhotoListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text, !searchText.isEmpty else {
+            photosCollection.isHidden = false
+            suggestionsTableView.isHidden = true
+
+            return
+        }
+
+
+        photosCollection.isHidden = true
+        suggestionsTableView.isHidden = false
+
+        updateSuggestions(for: searchText)
+    }
 }
 
 extension PhotoListViewController: PhotoListView {
@@ -247,10 +331,12 @@ extension PhotoListViewController: PhotoListView {
 
         if self.photos.count != 0 {
             emptyLabel.isHidden = true
+            suggestionsTableView.isHidden = true
             photosCollection.isHidden = false
             photosCollection.reloadData()
         } else {
             emptyLabel.isHidden = false
+            suggestionsTableView.isHidden = true
             photosCollection.isHidden = true
         }
     }

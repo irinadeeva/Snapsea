@@ -12,6 +12,8 @@
 		BEBC96162C925B3600663D96 /* PhotoDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC96152C925B3600663D96 /* PhotoDetailsPresenter.swift */; };
 		BEBC96182C925C2800663D96 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC96172C925C2800663D96 /* State.swift */; };
 		BEBC961A2C92DEC200663D96 /* UserResultRespond.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC96192C92DEC200663D96 /* UserResultRespond.swift */; };
+		BEBC961D2C93033800663D96 /* SuggestedHintTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC961C2C93033800663D96 /* SuggestedHintTableViewCell.swift */; };
+		BEBC96222C93302100663D96 /* NSMutableAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC96212C93302100663D96 /* NSMutableAttributedString.swift */; };
 		BEFCE1D62C8F5CF80036E793 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCE1D52C8F5CF80036E793 /* SceneDelegate.swift */; };
 		BEFCE1DD2C8F5CFA0036E793 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEFCE1DC2C8F5CFA0036E793 /* Assets.xcassets */; };
 		BEFCE1E02C8F5CFA0036E793 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = BEFCE1DF2C8F5CFA0036E793 /* Base */; };
@@ -78,6 +80,8 @@
 		BEBC96152C925B3600663D96 /* PhotoDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsPresenter.swift; sourceTree = "<group>"; };
 		BEBC96172C925C2800663D96 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		BEBC96192C92DEC200663D96 /* UserResultRespond.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResultRespond.swift; sourceTree = "<group>"; };
+		BEBC961C2C93033800663D96 /* SuggestedHintTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestedHintTableViewCell.swift; sourceTree = "<group>"; };
+		BEBC96212C93302100663D96 /* NSMutableAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSMutableAttributedString.swift; sourceTree = "<group>"; };
 		BEFCE1D02C8F5CF80036E793 /* Snapsea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snapsea.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEFCE1D52C8F5CF80036E793 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BEFCE1DC2C8F5CFA0036E793 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -138,6 +142,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BEBC961E2C93112E00663D96 /* SuggestedHints */ = {
+			isa = PBXGroup;
+			children = (
+				BEBC961C2C93033800663D96 /* SuggestedHintTableViewCell.swift */,
+			);
+			path = SuggestedHints;
+			sourceTree = "<group>";
+		};
 		BEFCE1C72C8F5CF80036E793 = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +246,7 @@
 		BEFCE22F2C90D6290036E793 /* PhotoSearch */ = {
 			isa = PBXGroup;
 			children = (
+				BEBC961E2C93112E00663D96 /* SuggestedHints */,
 				BEFCE2472C9161060036E793 /* PhotoAssembly.swift */,
 				BEBC96112C924CFB00663D96 /* PhotoListViewController.swift */,
 				BEFCE23B2C9159650036E793 /* PhotoListPresenter.swift */,
@@ -265,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				BEFCE2332C90D84D0036E793 /* GeometricParams.swift */,
+				BEBC96212C93302100663D96 /* NSMutableAttributedString.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -455,11 +469,13 @@
 			files = (
 				BEFCE2042C9039840036E793 /* Coordinator.swift in Sources */,
 				BEFCE2062C903D6C0036E793 /* MainCoordinator.swift in Sources */,
+				BEBC961D2C93033800663D96 /* SuggestedHintTableViewCell.swift in Sources */,
 				BEBC96122C924CFB00663D96 /* PhotoListViewController.swift in Sources */,
 				BEBC961A2C92DEC200663D96 /* UserResultRespond.swift in Sources */,
 				BEFCE21F2C90CC290036E793 /* NetworkRequest.swift in Sources */,
 				BEFCE2292C90CD640036E793 /* AppDelegate.swift in Sources */,
 				BEBC96182C925C2800663D96 /* State.swift in Sources */,
+				BEBC96222C93302100663D96 /* NSMutableAttributedString.swift in Sources */,
 				BEFCE24D2C9178BE0036E793 /* ErrorView.swift in Sources */,
 				BEFCE2342C90D84D0036E793 /* GeometricParams.swift in Sources */,
 				BEFCE23C2C9159650036E793 /* PhotoListPresenter.swift in Sources */,

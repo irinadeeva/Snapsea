@@ -10,7 +10,7 @@ import Foundation
 typealias PhotoCompletion = (Result<[Photo], Error>) -> Void
 
 protocol PhotoService {
-    func loadPhoto(for text: String, completion: @escaping PhotoCompletion)
+    func loadPhoto(for text: String, for page: Int, completion: @escaping PhotoCompletion)
     func fetchPhoto(with id: String) -> Photo?
 }
 
@@ -18,16 +18,15 @@ final class PhotoServiceImpl: PhotoService {
 
     private let networkClient: NetworkClient
     private let storage: PhotoStorage
-    private var lastLoadedPage: Int = 0
 
     init(networkClient: NetworkClient, storage: PhotoStorage) {
         self.storage = storage
         self.networkClient = networkClient
     }
 
-    func loadPhoto(for text: String, completion: @escaping PhotoCompletion) {
+    func loadPhoto(for text: String, for page: Int, completion: @escaping PhotoCompletion) {
 
-        let request = PhotoRequest(text: text, page: lastLoadedPage)
+        let request = PhotoRequest(text: text, page: page)
         networkClient.send(request: request, type: SearchedPhotoResultResponse.self) { [weak self] result in
             switch result {
             case .success(let data):
@@ -46,7 +45,6 @@ final class PhotoServiceImpl: PhotoService {
             }
         }
 
-        lastLoadedPage += 1
     }
 
     func fetchPhoto(with id: String) -> Photo? {
