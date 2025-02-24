@@ -1,6 +1,4 @@
 # Snapsea
-Test task for the iOS Developer position at Avito.
-
 Установка и запуск
 
 1. Клонирование репозитория
